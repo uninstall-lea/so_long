@@ -1,5 +1,5 @@
 #include "so_long.h"
-#include <stdio.h>
+
 void	check_map_elems(int line, int last_line, char *map)
 {
 	int	i;
@@ -13,22 +13,12 @@ void	check_map_elems(int line, int last_line, char *map)
 	nb_collectible = 0;
 	while (map[i] != '\n')
 	{
-		printf("line : %d\n", line);
-		if (line == 1 && map[i] != BORDER)
+		if ((line == 1 && map[i] != BORDER)
+			|| (line == last_line && map[i] != BORDER)
+			|| (line > 1 && line < last_line
+				&& (map[0] != BORDER || map[ft_strlen(map) - 2] != BORDER)))
 		{
-			write(2, "Error2\n", 6);
-			exit(EXIT_FAILURE);
-		}
-		else if	(line == last_line && map[i] != BORDER)
-		{
-			write(2, "Error3\n", 6);
-			exit(EXIT_FAILURE);
-		}
-		else if (line > 1 && line < last_line
-				&& (map[0] != BORDER || map[ft_strlen(map) - 1] != BORDER))
-		{
-			printf("map[strlen - 1] = %c\n", map[ft_strlen(map) - 1]);
-			write(2, "Error4\n", 6);
+			write(2, "Error\n", 6);
 			exit(EXIT_FAILURE);
 		}
 		else if (map[i] == EXIT)
@@ -41,11 +31,10 @@ void	check_map_elems(int line, int last_line, char *map)
 	}
 	if (line == last_line && (nb_exit != 1 || nb_player != 1 || nb_collectible == 0))
 	{
-		write(2, "Error5\n", 6);
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 }
-
 
 void	read_map(int ac, char **av)
 {
@@ -62,6 +51,7 @@ void	read_map(int ac, char **av)
 	max_call = 1;
 	fd = open(av[1], O_RDONLY);
 	map = get_next_line(fd);
+	if (!map)
 	while (map)
 	{
 		free(map);
@@ -69,17 +59,20 @@ void	read_map(int ac, char **av)
 		max_call++;
 	}
 	close(fd);
+	if (max_call <= 3)
+	{
+		write(2, "Error\n", 6);
+		exit(EXIT_FAILURE);
+	}
 	nb_call = 1;
 	fd = open(av[1], O_RDONLY);
 	map = get_next_line(fd);
 	while (map)
 	{
-		printf("%s", map);
 		check_map_elems(nb_call, max_call, map);
 		free(map);
 		map = get_next_line(fd);
 		nb_call++;
 	}
 	close(fd);
-
 }

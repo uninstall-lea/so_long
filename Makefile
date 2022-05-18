@@ -1,5 +1,5 @@
 MLXPATH =	mlx_linux/
-CFLAGS =	-Wall -Wextra -Werror -g3 -I.
+CFLAGS =	-fPIE -Wall -Wextra -Werror -g3 -I.
 LINUX =		-I /usr/include -L /usr/lib -L mlx_linux -I mlx_linux -lXext -l X11 -lm -lz
 NAME =		so_long
 
