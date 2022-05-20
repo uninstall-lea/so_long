@@ -29,6 +29,13 @@ typedef struct s_image
 	void	*img;
 }			t_image;
 
+typedef struct s_mapError
+{
+	int		nb_call;
+	int		max_call;
+	char	*map;
+}			t_mapError;
+
 void	set_image(t_window *win);
 void	open_window(t_window *win);
 void	read_map(int ac, char **av);

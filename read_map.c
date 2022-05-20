@@ -1,78 +1,71 @@
 #include "so_long.h"
 
-void	check_map_elems(int line, int last_line, char *map)
+static void	check_map_elems(int line, int last_line, char *map)
 {
 	int	i;
-	int	nb_exit;
-	int	nb_player;
-	int	nb_collectible;
+	int	n_exit;
+	int	n_player;
+	int	n_collec;
 
 	i = 0;
-	nb_exit = 0;
-	nb_player = 0;
-	nb_collectible = 0;
-	while (map[i] != '\n')
+	n_exit = 0;
+	n_player = 0;
+	n_collec = 0;
+	while (map[i] || map[i] != '\n')
 	{
 		if ((line == 1 && map[i] != BORDER)
 			|| (line == last_line && map[i] != BORDER)
 			|| (line > 1 && line < last_line
-				&& (map[0] != BORDER || map[ft_strlen(map) - 2] != BORDER)))
-		{
-			write(2, "Error\n", 6);
-			exit(EXIT_FAILURE);
-		}
+			&& (map[0] != BORDER || map[ft_strlen(map) - 2] != BORDER)))
+			exit((write(2, "Error\n", 6), EXIT_FAILURE));
 		else if (map[i] == EXIT)
-			nb_exit++;
+			n_exit++;
 		else if (map[i] == PLAYER)
-			nb_player++;
+			n_player++;
 		else if (map[i] == COLLECTIBLE)
-			nb_collectible++; 
+			n_collec++; 
 		i++;
 	}
-	if (line == last_line && (nb_exit != 1 || nb_player != 1 || nb_collectible == 0))
+	if (line == last_line && (n_exit != 1 || n_player != 1 || n_collec == 0))
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+}
+
+static int	check_args(int ac, char **av, t_mapError *check)
+{
+	int	fd;
+
+	if (ac != 2)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+	check->max_call = 1;
+	check->map = get_next_line(fd);
+	fd = open(av[1], O_RDONLY);
+	while (check->map)
 	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
+		free(check->map);
+		check->map = get_next_line(fd);
+		check->>max_call++;
 	}
+	close(fd);
+	if (check->max_call <= 3)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+	return (check->max_call);
 }
 
 void	read_map(int ac, char **av)
 {
-	int		fd;
-	int		nb_call;
-	int		max_call;
-	char	*map;
+	int			fd;
+	t_mapError	check;
 
-	if (ac != 2)
-	{
-		write(2, "Error1\n", 6);
-		exit(EXIT_FAILURE);
-	}
-	max_call = 1;
+	check.nb_call = 1;
 	fd = open(av[1], O_RDONLY);
-	map = get_next_line(fd);
-	if (!map)
-	while (map)
+	check.max_call = check_args(ac, &av[1], &check);
+	check.map = get_next_line(fd);
+	while (check.map)
 	{
-		free(map);
-		map = get_next_line(fd);
-		max_call++;
-	}
-	close(fd);
-	if (max_call <= 3)
-	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
-	}
-	nb_call = 1;
-	fd = open(av[1], O_RDONLY);
-	map = get_next_line(fd);
-	while (map)
-	{
-		check_map_elems(nb_call, max_call, map);
-		free(map);
-		map = get_next_line(fd);
-		nb_call++;
+		check_map_elems(check.nb_call, check.max_call);
+		free(check.map);
+		check.map = get_next_line(fd);
+		check.nb_call++;
 	}
 	close(fd);
 }
