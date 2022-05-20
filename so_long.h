@@ -12,6 +12,7 @@
 # define PLAYER 'P'
 # define BORDER '1'
 # define COLLECTIBLE 'C'
+# define ELEMS "01CEP"
 
 typedef struct s_window
 {
@@ -31,11 +32,15 @@ typedef struct s_image
 
 typedef struct s_mapError
 {
-	int		nb_call;
-	int		max_call;
+	int		line;
+	int		last_line;
+	int		n_exit;
+	int		n_player;
+	int		n_collec;
 	char	*map;
 }			t_mapError;
 
+char	*ft_strchr(const char *str, int c);
 void	set_image(t_window *win);
 void	open_window(t_window *win);
 void	read_map(int ac, char **av);

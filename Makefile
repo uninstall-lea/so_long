@@ -7,6 +7,7 @@ SRCS =		image.c						\
 			window.c					\
 			so_long.c					\
 			read_map.c					\
+			ft_strchr.c					\
 			ft_strlen.c 				\
 			gnl/get_next_line.c 		\
 			gnl/get_next_line_utils.c	\
