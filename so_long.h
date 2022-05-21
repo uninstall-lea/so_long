@@ -9,10 +9,13 @@
 
 # define ESCAPE 65307
 # define EXIT 'E'
-# define PLAYER 'P'
+# define GROUND '0'
 # define BORDER '1'
-# define COLLECTIBLE 'C'
-# define ELEMS "01CEP"
+# define COLLEC 'C'
+# define PLAYER 'P'
+# define ENEMIES 'N'
+# define ELEMS "01CENP"
+# define IMG_SIZE 64
 
 typedef struct s_window
 {
@@ -30,20 +33,31 @@ typedef struct s_image
 	void	*img;
 }			t_image;
 
-typedef struct s_mapError
+typedef struct s_map
 {
-	int		line;
-	int		last_line;
-	int		n_exit;
-	int		n_player;
-	int		n_collec;
-	char	*map;
-}			t_mapError;
+	int		nb_exit;
+	int		nb_player;
+	int		nb_collec;
+	int		nb_lines;
+	int		nb_columns;
+	char	*str_line;
+	char	**map;
+}			t_map;
+
+typedef struct s_textures
+{
+	t_image exit;
+	t_image ground;
+	t_image	border;
+	t_image	collec;
+	t_image	player;
+	t_image	enemies;	
+}			t_textures;
 
 char	*ft_strchr(const char *str, int c);
-void	set_image(t_window *win);
-void	open_window(t_window *win);
-void	read_map(int ac, char **av);
+void	set_map(char **map, t_window *win);
+void	read_map(int ac, char **av, t_map *map);
+void	open_window(t_window *win, t_map *map);
 size_t	ft_strlen(const char *start);
 
 #endif

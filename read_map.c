@@ -1,81 +1,91 @@
 #include "so_long.h"
 
-static void	check_args(int ac, char **av, t_mapError *check)
-{
-	int	fd;
-
-	if (ac != 2)
-		exit((write(2, "Error\n", 6), EXIT_FAILURE));
-	check->last_line = 1;
-	fd = open(av[1], O_RDONLY);
-	check->map = get_next_line(fd);
-	while (check->map)
-	{
-		free(check->map);
-		check->map = get_next_line(fd);
-		check->last_line++;
-	}
-	close(fd);
-	if (check->last_line <= 3)
-		exit((write(2, "Error\n", 6), EXIT_FAILURE));
-}
-
-static void	check_map_elems(t_mapError *check)
-{
-	int	i;
-
-	i = 0;
-	while (check->map[i] && check->map[i] != '\n')
-	{
-		if (ft_strchr(ELEMS, check->map[i]) == 0)
-			exit((write(2, "Error\n", 6), EXIT_FAILURE));
-		else if (check->map[i] == EXIT)
-			check->n_exit++;
-		else if (check->map[i] == PLAYER)
-			check->n_player++;
-		else if (check->map[i] == COLLECTIBLE)
-			check->n_collec++; 
-		i++;
-	}
-	if (check->line == check->last_line - 1 && (check->n_exit != 1
-		|| check->n_player != 1 || check->n_collec == 0))
-		exit((write(2, "Error\n", 6), EXIT_FAILURE));
-}
-
-static void	check_map_borders(int line, int last_line, char *map)
+static void	check_map_elems(int line, char *map , t_map *check)
 {
 	int	i;
 
 	i = 0;
 	while (map[i] && map[i] != '\n')
 	{
-		if ((map[i] != BORDER && (line == 1 || line == last_line))
-			|| (line > 1 && line < last_line
+		if (ft_strchr(ELEMS, map[i]) == 0)
+			exit((write(2, "Error\n", 6), EXIT_FAILURE));
+		else if (map[i] == EXIT)
+			check->nb_exit++;
+		else if (map[i] == PLAYER)
+			check->nb_player++;
+		else if (map[i] == COLLEC)
+			check->nb_collec++; 
+		i++;
+	}
+	if (line == check->nb_lines - 1 && (check->nb_exit != 1
+		|| check->nb_player != 1 || check->nb_collec == 0))
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+}
+
+static void	check_map_borders(int line, char *map, t_map *check)
+{
+	int	i;
+
+	i = 0;
+	while (map[i] && map[i] != '\n')
+	{
+		if ((int)ft_strlen(map) - 1 != check->nb_columns
+			|| (map[i] != BORDER && (line == 0 || line == check->nb_lines - 1))
+			|| (line > 0 && line < check->nb_lines
 			&& (map[0] != BORDER || map[ft_strlen(map) - 2] != BORDER)))
 			exit((write(2, "Error\n", 6), EXIT_FAILURE));
 		i++;
 	}
 }
 
-void	read_map(int ac, char **av)
+static void	check_args(int ac, char **av, t_map *check)
 {
-	int			fd;
-	t_mapError	check;
+	int	fd;
 
-	check.line = 1;
-	check.n_exit = 0;
-	check.n_player = 0;
-	check.n_collec = 0;
-	check_args(ac, av, &check);
+	if (ac != 2)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
 	fd = open(av[1], O_RDONLY);
-	check.map = get_next_line(fd);
-	while (check.map)
+	check->str_line = get_next_line(fd);
+	check->nb_columns = ft_strlen(check->str_line) - 1;
+	while (check->str_line)
 	{
-		check_map_elems(&check);
-		check_map_borders(check.line, check.last_line, check.map);
-		free(check.map);
-		check.map = get_next_line(fd);
-		check.line++;
+		free(check->str_line);
+		check->str_line = get_next_line(fd);
+		check->nb_lines++;
+	}
+	close(fd);
+	if (check->nb_lines <= 2)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+}
+
+static void set_vars(int ac, char **av, t_map *check)
+{
+	check->nb_exit = 0;
+	check->nb_player = 0;
+	check->nb_collec = 0;
+	check->nb_lines = 0;
+	check_args(ac, av, check);
+	check->map = malloc(sizeof(char *) * (check->nb_lines + 1));
+	if (!check->map)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+	check->map[check->nb_lines] = NULL;
+
+}
+
+void	read_map(int ac, char **av, t_map *check)
+{
+	int	i;
+	int	fd;
+
+	i = 0;
+	set_vars(ac, av, check);
+	fd = open(av[1], O_RDONLY);
+	while (i < check->nb_lines)
+	{
+		check->map[i] = get_next_line(fd);
+		check_map_elems(i, check->map[i], check);
+		check_map_borders(i, check->map[i], check);
+		i++;
 	}
 	close(fd);
 }
