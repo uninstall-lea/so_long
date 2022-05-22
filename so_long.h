@@ -55,6 +55,7 @@ typedef struct s_textures
 }			t_textures;
 
 char	*ft_strchr(const char *str, int c);
+char	*ft_strstr(char *str, char *to_find);
 void	set_map(char **map, t_window *win);
 void	read_map(int ac, char **av, t_map *map);
 void	open_window(t_window *win, t_map *map);

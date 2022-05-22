@@ -9,6 +9,7 @@ SRCS =		window.c					\
 			read_map.c					\
 			ft_strchr.c					\
 			ft_strlen.c 				\
+			ft_strstr.c					\
 			gnl/get_next_line.c 		\
 			gnl/get_next_line_utils.c	\
 

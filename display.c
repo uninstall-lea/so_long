@@ -16,12 +16,6 @@ static void	convert_all_xpm(t_window *win, t_textures *set)
 						&set->enemies.w, &set->enemies.h);
 }
 
-static void	put_image_to_window(int x, int y, t_window *win, t_image put)
-{
-	mlx_put_image_to_window(win->mlx, win->mlx_win, put.img,
-	x * IMG_SIZE, y * IMG_SIZE);
-}
-
 static void	set_textures(t_window *win, t_textures *set)
 {	
 	set->collec.path = "./doll.xpm";
@@ -31,6 +25,12 @@ static void	set_textures(t_window *win, t_textures *set)
 	set->player.path = "./lbisson_de_noel.xpm";
 	set->enemies.path = "./evil_fat_bisson.xpm";
 	convert_all_xpm(win, set);
+}
+
+static void	put_image_to_window(int x, int y, t_window *win, t_image put)
+{
+	mlx_put_image_to_window(win->mlx, win->mlx_win, put.img,
+	x * IMG_SIZE, y * IMG_SIZE);
 }
 
 void	set_map(char **map, t_window *win)

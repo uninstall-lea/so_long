@@ -38,12 +38,10 @@ static void	check_map_borders(int line, char *map, t_map *check)
 	}
 }
 
-static void	check_args(int ac, char **av, t_map *check)
+static void	check_map_size(char **av, t_map *check)
 {
 	int	fd;
 
-	if (ac != 2)
-		exit((write(2, "Error\n", 6), EXIT_FAILURE));
 	fd = open(av[1], O_RDONLY);
 	check->str_line = get_next_line(fd);
 	check->nb_columns = ft_strlen(check->str_line) - 1;
@@ -58,13 +56,13 @@ static void	check_args(int ac, char **av, t_map *check)
 		exit((write(2, "Error\n", 6), EXIT_FAILURE));
 }
 
-static void set_vars(int ac, char **av, t_map *check)
+static void set_vars(char **av, t_map *check)
 {
 	check->nb_exit = 0;
 	check->nb_player = 0;
 	check->nb_collec = 0;
 	check->nb_lines = 0;
-	check_args(ac, av, check);
+	check_map_size(av, check);
 	check->map = malloc(sizeof(char *) * (check->nb_lines + 1));
 	if (!check->map)
 		exit((write(2, "Error\n", 6), EXIT_FAILURE));
@@ -77,8 +75,12 @@ void	read_map(int ac, char **av, t_map *check)
 	int	i;
 	int	fd;
 
+	if (ac != 2)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
+	else if (ft_strstr(av[1], ".ber") == 0)
+		exit((write(2, "Error\n", 6), EXIT_FAILURE));
 	i = 0;
-	set_vars(ac, av, check);
+	set_vars(av, check);
 	fd = open(av[1], O_RDONLY);
 	while (i < check->nb_lines)
 	{
