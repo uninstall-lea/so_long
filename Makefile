@@ -7,6 +7,7 @@ SRCS =		window.c					\
 			display.c					\
 			so_long.c					\
 			read_map.c					\
+			check_args.c				\
 			ft_strchr.c					\
 			ft_strlen.c 				\
 			ft_strstr.c					\
