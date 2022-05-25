@@ -16,6 +16,7 @@ static int check_type_of_arg(char **av)
 {
 	if (ft_strlen(ft_strstr(av[1], ".ber")) != ft_strlen(".ber"))
 		return (FALSE);
+	return (TRUE);
 }
 
 void check_args(int ac, char **av)

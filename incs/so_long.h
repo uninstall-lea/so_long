@@ -3,19 +3,34 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <stdio.h>
 # include "mlx_linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
 
-# define FALSE 0
-# define TRUE 1 
-# define ESCAPE 65307
-# define EXIT 'E'
+/* MAP ELEMS */
+# define ELEMS "01CNEP"
+# define OBSTACLE "1E"
 # define GROUND '0'
 # define BORDER '1'
 # define COLLEC 'C'
-# define PLAYER 'P'
 # define ENEMIES 'N'
-# define ELEMS "01CENP"
+# define EXIT 'E'
+# define PLAYER 'P'
+
+/* KEYCODE */
+# define ESCAPE 65307
+# define W 122
+# define A 113
+# define S 115
+# define D 100
+
+/* DEFINE VALUES */
+# define TRUE 1 
+# define FALSE 0
+# define IS_ELEM TRUE
+# define NOT_ELEM FALSE
+# define CAN_MOVE TRUE
+# define CANT_MOVE FALSE
 # define IMG_SIZE 64
 
 typedef struct s_window
@@ -23,7 +38,7 @@ typedef struct s_window
 	int		w;
 	int		h;
 	void	*mlx;
-	void	*mlx_win;
+	void	*win_ptr;
 }			t_window;
 
 typedef struct s_image
@@ -55,13 +70,31 @@ typedef struct s_textures
 	t_image	enemies;	
 }			t_textures;
 
+typedef struct s_player
+{
+	int	x;
+	int	y;
+}			t_player;
+
+/* STRINGS */
 char	*ft_strchr(const char *str, int c);
 char	*ft_strstr(char *str, char *to_find);
-void	set_map(char **map, t_window *win);
-void	read_map(int ac, char **av, t_map *map);
-void	open_window(t_window *win, t_map *map);
-void 	check_args(int ac, char **av);
-void 	error_exit(void); // le changer de file
 size_t	ft_strlen(const char *start);
+
+/* MAP */
+void	check_map_borders(int line, char *map, t_map *check);
+void	check_map_elems(int line, char *map , t_map *check);
+void	check_map_size(char **av, t_map *check);
+void	init_map(int ac, char **av, t_map *map);
+void 	check_args(int ac, char **av);
+
+/* TEXTURES */
+void	display_img(char **map, t_window *win, t_textures *set);
+
+/* WINDOW */
+void	open_window(t_window *win, t_map *map);
+
+/* OTHER UTILS */
+void 	error_exit(void);
 
 #endif

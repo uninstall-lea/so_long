@@ -2,9 +2,10 @@
 
 static int	close_window(int keycode, t_window *win)
 {
+	printf("%d\n", keycode);
 	if (keycode == ESCAPE)
 	{
-		mlx_destroy_window(win->mlx, win->mlx_win);
+		mlx_destroy_window(win->mlx, win->win_ptr);
 		mlx_destroy_display(win->mlx);
 		free(win->mlx);
 		exit(EXIT_SUCCESS);
@@ -22,6 +23,6 @@ void	open_window(t_window *win, t_map *map)
 	}
 	win->h = map->nb_lines * IMG_SIZE;
 	win->w = map->nb_columns * IMG_SIZE;
-	win->mlx_win = mlx_new_window(win->mlx, win->w, win->h, "Run away from fat_bisson");
-	mlx_key_hook(win->mlx_win, close_window, win);
+	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h, "Run away from fat_bisson");
+	mlx_key_hook(win->win_ptr, close_window, win);
 }

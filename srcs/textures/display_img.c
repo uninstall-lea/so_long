@@ -1,4 +1,4 @@
-#include "../incs/so_long.h"
+#include "../../incs/so_long.h"
 
 static void	convert_all_xpm(t_window *win, t_textures *set)
 {
@@ -21,46 +21,45 @@ static void	convert_all_xpm(t_window *win, t_textures *set)
 
 static void	set_textures(t_window *win, t_textures *set)
 {	
-	set->collec.path = "./xpm/doll.xpm";
-	set->ground.path = "./xpm/rainbow.xpm";
-	set->exit.path = "./xpm/rainbow_dash.xpm";
-	set->border.path = "./xpm/malicious_star.xpm";
-	set->player.path = "./xpm/lbisson_de_noel.xpm";
-	set->enemies.path = "./xpm/evil_fat_bisson.xpm";
+	set->collec.path = "./srcs/textures/doll.xpm";
+	set->ground.path = "./srcs/textures/rainbow.xpm";
+	set->exit.path = "./srcs/textures/rainbow_dash.xpm";
+	set->border.path = "./srcs/textures/malicious_star.xpm";
+	set->player.path = "./srcs/textures/lbisson_de_noel.xpm";
+	set->enemies.path = "./srcs/textures/evil_fat_bisson.xpm";
 	convert_all_xpm(win, set);
 }
 
 static void	put_image_to_window(int x, int y, t_window *win, t_image put)
 {
-	mlx_put_image_to_window(win->mlx, win->mlx_win, put.img,
+	mlx_put_image_to_window(win->mlx, win->win_ptr, put.img,
 	x * IMG_SIZE, y * IMG_SIZE);
 }
 
-void	set_map(char **map, t_window *win)
+void	display_img(char **map, t_window *win, t_textures *set)
 {
 	int			x;
 	int			y;
-	t_textures	set;
 	
 	y = 0;
-	set_textures(win, &set);
+	set_textures(win, set);
 	while (y * IMG_SIZE < win->h)
 	{
 		x = 0;
 		while (x * IMG_SIZE < win->w)
 		{
 			if (map[y][x] == EXIT)
-				put_image_to_window(x, y, win, set.exit);
+				put_image_to_window(x, y, win, set->exit);
 			else if (map[y][x] == GROUND)
-				put_image_to_window(x, y, win, set.ground);
+				put_image_to_window(x, y, win, set->ground);
 			else if (map[y][x] == BORDER)
-				put_image_to_window(x, y, win, set.border);
+				put_image_to_window(x, y, win, set->border);
 			else if (map[y][x] == COLLEC)
-				put_image_to_window(x, y, win, set.collec);
+				put_image_to_window(x, y, win, set->collec);
 			else if (map[y][x] == PLAYER)
-				put_image_to_window(x, y, win, set.player);
+				put_image_to_window(x, y, win, set->player);
 			else if (map[y][x] == ENEMIES)
-				put_image_to_window(x, y, win, set.enemies);
+				put_image_to_window(x, y, win, set->enemies);
 			x++;	
 		}
 		y++;

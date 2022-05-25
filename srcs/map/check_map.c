@@ -12,29 +12,44 @@
 
 #include "../../incs/so_long.h"
 
-static void	check_map_elems(int line, char *map , t_map *check)
+static int is_elem(char elem)
+{
+	if (ft_strchr(ELEMS, elem) == NOT_ELEM)
+		return (NOT_ELEM);
+	return (IS_ELEM);
+}
+
+static int	count_elems(int line, char elem, t_map *check)
+{
+	if (elem == EXIT)
+		check->nb_exit++;
+	else if (elem == PLAYER)
+		check->nb_player++;
+	else if (elem == COLLEC)
+		check->nb_collec++; 
+	if (line == check->nb_lines - 1 && (check->nb_exit != 1
+		|| check->nb_player != 1 || check->nb_collec == 0))
+		return (FALSE);
+	return (TRUE);
+}
+
+void	check_map_elems(int line, char *map , t_map *check)
 {
 	int	i;
 
 	i = 0;
 	while (map[i] && map[i] != '\n')
 	{
-		if (ft_strchr(ELEMS, map[i]) == 0)
+		if (is_elem(map[i]) == NOT_ELEM)
 			error_exit();
-		else if (map[i] == EXIT)
-			check->nb_exit++;
-		else if (map[i] == PLAYER)
-			check->nb_player++;
-		else if (map[i] == COLLEC)
-			check->nb_collec++; 
+		count_elems(line, map[i], check);
 		i++;
 	}
-	if (line == check->nb_lines - 1 && (check->nb_exit != 1
-		|| check->nb_player != 1 || check->nb_collec == 0))
+	if (count_elems(line, map[i], check) == FALSE)
 		error_exit();
 }
 
-static void	check_map_borders(int line, char *map, t_map *check)
+void	check_map_borders(int line, char *map, t_map *check)
 {
 	int	i;
 
@@ -50,7 +65,7 @@ static void	check_map_borders(int line, char *map, t_map *check)
 	}
 }
 
-static void	check_map_size(char **av, t_map *check)
+void	check_map_size(char **av, t_map *check)
 {
 	int	fd;
 

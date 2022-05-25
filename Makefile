@@ -3,16 +3,15 @@ CFLAGS =	-fPIE -Wall -Wextra -Werror -g3 -I.
 LINUX =		-I /usr/include -L /usr/lib -L mlx_linux -I mlx_linux -lXext -l X11 -lm -lz
 NAME =		so_long
 
-SRCS =		window.c					\
-			display.c					\
-			so_long.c					\
-			read_map.c					\
-			check_args.c				\
-			ft_strchr.c					\
-			ft_strlen.c 				\
-			ft_strstr.c					\
-			gnl/get_next_line.c 		\
-			gnl/get_next_line_utils.c	\
+SRCS =		srcs/gnl/get_next_line_utils.c	\
+			srcs/gnl/get_next_line.c		\
+			srcs/map/check_args.c			\
+			srcs/map/check_map.c			\
+			srcs/map/init_map.c				\
+			srcs/so_long.c					\
+			srcs/textures/display_img.c		\
+			srcs/utils.c					\
+			srcs/window.c					\
 
 OBJS =		$(SRCS:.c=.o)
 
