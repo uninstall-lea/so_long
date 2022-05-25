@@ -96,5 +96,6 @@ void	open_window(t_window *win, t_map *map);
 
 /* OTHER UTILS */
 void 	error_exit(void);
+void	get_coordinates(char to_find, char **map, void *to_init);
 
 #endif
