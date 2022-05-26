@@ -24,5 +24,4 @@ void	open_window(t_window *win, t_map *map)
 	win->h = map->nb_lines * IMG_SIZE;
 	win->w = map->nb_columns * IMG_SIZE;
 	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h, "Run away from fat_bisson");
-	mlx_key_hook(win->win_ptr, close_window, win);
 }

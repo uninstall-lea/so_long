@@ -30,7 +30,7 @@ static void	set_textures(t_window *win, t_textures *set)
 	convert_all_xpm(win, set);
 }
 
-static void	put_image_to_window(int x, int y, t_window *win, t_image put)
+void	put_image_to_window(int x, int y, t_window *win, t_image put)
 {
 	mlx_put_image_to_window(win->mlx, win->win_ptr, put.img,
 	x * IMG_SIZE, y * IMG_SIZE);

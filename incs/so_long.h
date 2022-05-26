@@ -19,8 +19,8 @@
 
 /* KEYCODE */
 # define ESCAPE 65307
-# define W 122
-# define A 113
+# define W 119
+# define A 97
 # define S 115
 # define D 100
 
@@ -32,6 +32,8 @@
 # define CAN_MOVE TRUE
 # define CANT_MOVE FALSE
 # define IMG_SIZE 64
+
+typedef int	(*t_fptr)(int);
 
 typedef struct s_window
 {
@@ -96,6 +98,7 @@ void	open_window(t_window *win, t_map *map);
 
 /* OTHER UTILS */
 void 	error_exit(void);
-void	get_coordinates(char to_find, char **map, void *to_init);
+void	get_coordinates(char to_find, char **map, t_player *to_init);
+void	put_image_to_window(int x, int y, t_window *win, t_image put); //la changer de fichier
 
 #endif

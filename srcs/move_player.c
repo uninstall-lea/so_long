@@ -2,48 +2,53 @@
 
 static int	move_up(char **map, t_window *win, t_textures *pack, t_player *player)
 {
-	if (ft_strchr(OBSTACLE, map[player->y - 1] != CANT_MOVE)
+	if (ft_strchr(OBSTACLE, map[player->y - 1][player->x]) != CANT_MOVE)
 	{
-		put_image_tp_window(player->x, player->y, win, pack->ground);
+		put_image_to_window(player->x, player->y, win, pack->ground);
 		player->y--;
 		put_image_to_window(player->x, player->y, win, pack->player);
 	}
+	return (0);
 }
 
 static int move_left(char **map, t_window *win, t_textures *pack, t_player *player)
 {
-	if (ft_strchr(OBSTACLE, map[player->x - 1] != CANT_MOVE)
+	if (ft_strchr(OBSTACLE, map[player->y][player->x - 1]) != CANT_MOVE)
 		{
-			put_image_tp_window(player->x, player->y, win, pack->ground);
+			put_image_to_window(player->x, player->y, win, pack->ground);
 			player->x--;
 			put_image_to_window(player->x, player->y, win, pack->player);
 		}
+	return (0);
 }
 
 static int move_down(char **map, t_window *win, t_textures *pack, t_player *player)
 {
-	if (ft_strchr(OBSTACLE, map[player->y + 1] != CANT_MOVE)
+	if (ft_strchr(OBSTACLE, map[player->y + 1][player->x]) != CANT_MOVE)
 	{
-		put_image_tp_window(player->x, player->y, win, pack->ground);
+		put_image_to_window(player->x, player->y, win, pack->ground);
 		player->y++;
 		put_image_to_window(player->x, player->y, win, pack->player);
 	}
+	return (0);
 }
 
 static int move_right(char **map, t_window *win, t_textures *pack, t_player *player)
 {
-	if (ft_strchr(OBSTACLE, map[player->x + 1] != CANT_MOVE)
+	if (ft_strchr(OBSTACLE, map[player->y][player->x + 1]) != CANT_MOVE)
 	{
-		put_image_tp_window(player->x, player->y, win, pack->ground);
+		put_image_to_window(player->x, player->y, win, pack->ground);
 		player->x++;
 		put_image_to_window(player->x, player->y, win, pack->player);
 	}
+	return (0);
 }
 
 void	move_player(int keycode, char **map, t_window *win, t_textures *pack)
 {
 	t_player player;
 
+	printf("coucou\n");
 	get_coordinates(PLAYER, map, &player);
 
 	if (keycode == W)

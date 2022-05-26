@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 	init_map(ac, av, &map);
 	open_window(&win, &map);
 	display_img(map.map, &win, &pack);
+	move_player(); 
 	mlx_loop(win.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/05/25 17:43:17 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/05/26 17:33:33 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,18 @@ void error_exit(void)
 	exit(EXIT_FAILURE);
 }
 
-void	get_coordinates(char to_find, char **map, void *to_init)
+void	get_coordinates(char to_find, char **map, t_player *to_init)
 {
 	to_init->y = 0;
 	
 	while (map[to_init->y])
 	{
-		to_init->x = ft_strchr(map[to_init->y], to_find);
+		to_init->x = ft_strchr(map[to_init->y], to_find) - map[to_init->y];
 		if (to_init->x == TRUE)
+		{
+			printf("y: %d / x: %d\n", to_init->y, to_init->x);
 			return;
-		y++;
+		}
+		to_init->y++;
+	}
 }

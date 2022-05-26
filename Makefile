@@ -8,6 +8,7 @@ SRCS =		srcs/gnl/get_next_line_utils.c	\
 			srcs/map/check_args.c			\
 			srcs/map/check_map.c			\
 			srcs/map/init_map.c				\
+			srcs/move_player.c				\
 			srcs/so_long.c					\
 			srcs/textures/display_img.c		\
 			srcs/utils.c					\
