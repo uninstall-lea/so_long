@@ -18,22 +18,28 @@
 # define PLAYER 'P'
 
 /* KEYCODE */
-# define ESCAPE 65307
+# define ESC 65307
+# define UP 65362
 # define W 119
+# define Z 122
+# define LEFT 65361
 # define A 97
+# define Q 113
+# define DOWN 65364
 # define S 115
+# define RIGHT 65363
 # define D 100
 
 /* DEFINE VALUES */
 # define TRUE 1 
 # define FALSE 0
+# define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
-# define CAN_MOVE TRUE
-# define CANT_MOVE FALSE
+# define CAN_MOVE 0
 # define IMG_SIZE 64
 
-typedef int	(*t_fptr)(int);
+typedef void	(*t_fptr)();
 
 typedef struct s_window
 {
@@ -78,6 +84,15 @@ typedef struct s_player
 	int	y;
 }			t_player;
 
+typedef struct s_data
+{
+	int		nb_moves;
+	t_map		map;
+	t_window	win;
+	t_textures	pack;
+	t_player	player;
+}				t_data;
+
 /* STRINGS */
 char	*ft_strchr(const char *str, int c);
 char	*ft_strstr(char *str, char *to_find);
@@ -92,13 +107,26 @@ void 	check_args(int ac, char **av);
 
 /* TEXTURES */
 void	display_img(char **map, t_window *win, t_textures *set);
+void    destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
 void	open_window(t_window *win, t_map *map);
 
+/* EVENTS */
+int		handle_events(int keycode, t_data *data);
+void	move_up(char **map, t_data *data);
+void	move_left(char **map, t_data *data);
+void	move_down(char **map, t_data *data);
+void	move_right(char **map, t_data *data);
+void	close_window(t_data *data);
+
 /* OTHER UTILS */
+int		ft_intchr(int *arr, int size, int to_find);
 void 	error_exit(void);
+void	ft_free(char **str);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar_fd(char c, int fd);
 void	get_coordinates(char to_find, char **map, t_player *to_init);
-void	put_image_to_window(int x, int y, t_window *win, t_image put); //la changer de fichier
+void	put_img_to_window(int x, int y, t_window *win, t_image to_put); //la changer de fichier
 
 #endif

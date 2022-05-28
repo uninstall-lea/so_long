@@ -2,15 +2,14 @@
 
 int	main(int ac, char **av)
 {
-	t_map		map;
-	t_window	win;
-	t_textures	pack;
-	//t_player	player;
+	t_data		data;
 
-	init_map(ac, av, &map);
-	open_window(&win, &map);
-	display_img(map.map, &win, &pack);
-	move_player(); 
-	mlx_loop(win.mlx);
+	data.nb_moves = 0;
+	init_map(ac, av, &data.map);
+	open_window(&data.win, &data.map);
+	display_img(data.map.map, &data.win, &data.pack);
+	get_coordinates(PLAYER, data.map.map, &data.player);
+	mlx_key_hook(data.win.win_ptr, handle_events, &data);
+	mlx_loop(data.win.mlx);
 	return (0);
 }
