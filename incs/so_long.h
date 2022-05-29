@@ -9,7 +9,6 @@
 
 /* MAP ELEMS */
 # define ELEMS "01CNEP"
-# define OBSTACLE "1E"
 # define GROUND '0'
 # define BORDER '1'
 # define COLLEC 'C'
@@ -36,7 +35,11 @@
 # define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
-# define CAN_MOVE 0
+# define CAN_MOVE TRUE
+# define CANT_MOVE FALSE
+# define NO_MORE_COLLECTIBLE_LEFT 0
+# define CAN_GO_TO_PONEY TRUE
+# define CANT_GO_TO_PONEY FALSE
 # define IMG_SIZE 64
 
 typedef void	(*t_fptr)();
@@ -120,12 +123,20 @@ void	move_down(char **map, t_data *data);
 void	move_right(char **map, t_data *data);
 void	close_window(t_data *data);
 
+/* MOVES ACCESSIBILITY */
+int		check_accessibility(char c, t_data *data);
+int 	decrease(char where, char **map, t_data *data);
+int 	increase(char where, char **map, t_data *data);
+void	check_for_exit(char **map, t_data *data);
+void	check_for_collec(char **map, t_data *data);
+
 /* OTHER UTILS */
 int		ft_intchr(int *arr, int size, int to_find);
 void 	error_exit(void);
 void	ft_free(char **str);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
+void	count_and_print_my_moves(t_data *data);
 void	get_coordinates(char to_find, char **map, t_player *to_init);
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put); //la changer de fichier
 

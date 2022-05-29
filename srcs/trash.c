@@ -127,3 +127,9 @@ void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
 	mlx_put_image_to_window(win->mlx, win->win_ptr, to_put.img,
 	x * IMG_SIZE, y * IMG_SIZE);
 }
+
+void	count_and_print_my_moves(t_data *data)
+{
+	ft_putnbr_fd(++data->nb_moves, 1);
+	write(1, "\n", 1);
+}

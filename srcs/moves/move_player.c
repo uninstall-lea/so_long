@@ -1,18 +1,14 @@
-#include "../incs/so_long.h"
-
-static void	count_and_print_my_moves(t_data *data)
-{
-	ft_putnbr_fd(++data->nb_moves, 1);
-	write(1, "\n", 1);
-}
+#include "../../incs/so_long.h"
 
 void	move_up(char **map, t_data *data)
 {
-	if (ft_strchr(OBSTACLE, map[data->player.y - 1][data->player.x]) == CAN_MOVE)
+	if (decrease('y', map, data) == CAN_MOVE)
 	{
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.ground);
 		data->player.y--;
+		check_for_collec(map, data);
+		check_for_exit(map, data);
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.player);
 		count_and_print_my_moves(data);
@@ -21,11 +17,13 @@ void	move_up(char **map, t_data *data)
 
 void move_left(char **map, t_data *data)
 {
-	if (ft_strchr(OBSTACLE, map[data->player.y][data->player.x - 1]) == CAN_MOVE)
+	if (decrease('x', map, data) == CAN_MOVE)
 	{
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.ground);
 		data->player.x--;
+		check_for_collec(map, data);
+		check_for_exit(map, data);
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.player);
 		count_and_print_my_moves(data);
@@ -34,11 +32,13 @@ void move_left(char **map, t_data *data)
 
 void move_down(char **map, t_data *data)
 {
-	if (ft_strchr(OBSTACLE, map[data->player.y + 1][data->player.x]) == CAN_MOVE)
+	if (increase('y', map, data) == CAN_MOVE)
 	{
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.ground);
 		data->player.y++;
+		check_for_collec(map, data);
+		check_for_exit(map, data);
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.player);
 		count_and_print_my_moves(data);
@@ -47,11 +47,13 @@ void move_down(char **map, t_data *data)
 
 void move_right(char **map, t_data *data)
 {
-	if (ft_strchr(OBSTACLE, map[data->player.y][data->player.x + 1]) == CAN_MOVE)
+	if (increase('x', map, data) == CAN_MOVE)
 	{
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.ground);
 		data->player.x++;
+		check_for_collec(map, data);
+		check_for_exit(map, data);
 		put_img_to_window(data->player.x, data->player.y,
 							&data->win, data->pack.player);
 		count_and_print_my_moves(data);
