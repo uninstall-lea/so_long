@@ -83,8 +83,8 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	long int	x;
+	long int	y;
 }			t_player;
 
 typedef struct s_data

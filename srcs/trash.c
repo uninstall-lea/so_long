@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/01 16:50:11 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/01 18:02:06 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	get_coordinates(char to_find, char **map, t_player *to_init)
 	while (map[to_init->y])
 	{
 		to_init->x = ft_strchr(map[to_init->y], to_find) - map[to_init->y];
-		if (to_init->x != 0)
+		if (to_init->x >= 1)
 			return;
 		to_init->y++;
 	}

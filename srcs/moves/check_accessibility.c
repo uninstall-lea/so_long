@@ -44,13 +44,13 @@ int decrease(char where, char **map, t_data *data)
 	{
 		printf("pb13\n");
 		return (check_accessibility(map[data->player.y - 1][data->player.x],
-				data));
+			data));
 	}
 	else if (where == 'x')
 	{
 		printf("pb14\n");
 		return (check_accessibility(map[data->player.y][data->player.x - 1],
-				data));
+			data));
 	}
 	printf("pb15\n");
 	return (CANT_MOVE);
@@ -58,18 +58,18 @@ int decrease(char where, char **map, t_data *data)
 
 int increase(char where, char **map, t_data *data)
 {
-	if (where == 'y')
+	printf("adresse : %p\n", map);
+	if (where == 'y' && map[(data->player.y) + 1][data->player.x])
 	{
 		printf("pb13\n");
-		if (map[data->player.y+1][data->player.x])
-			return (check_accessibility(map[data->player.y + 1][data->player.x],
-				data));
+		return (check_accessibility(map[data->player.y + 1][data->player.x],
+			data));
 	}
 	else if (where == 'x')
 	{
 		printf("pb14\n");
 		return (check_accessibility(map[data->player.y][data->player.x + 1],
-				data));
+			data));
 	}
 	printf("pb15\n");
 	return (CANT_MOVE);

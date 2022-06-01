@@ -15,9 +15,8 @@ static t_fptr   dispatch(int keycode)
 
 int   handle_events(int keycode, t_data *data)
 {
-//	int	 *x;
-//	int	 *y;
 	t_fptr  event;
+	
 	printf("pb1\n");
 	event = (*dispatch)(keycode);
 	printf("pb2\n");
