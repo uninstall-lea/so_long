@@ -18,10 +18,15 @@ int   handle_events(int keycode, t_data *data)
 //	int	 *x;
 //	int	 *y;
 	t_fptr  event;
-
+	printf("pb1\n");
 	event = (*dispatch)(keycode);
+	printf("pb2\n");
 	if (event)
+	{
+		printf("pb3\n");
 		(*event)(data->map.map, data);
+		printf("pb4\n");
+	}
 	else if (keycode == ESC)
 		close_window(data);
 	return (0);
