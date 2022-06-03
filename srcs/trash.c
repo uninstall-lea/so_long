@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/01 18:02:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/03 16:52:42 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_intchr(int *arr, int size, int to_find)
 			return (i);
 		i++;
 	}
-	return(NOT_FOUND);
+	return (NOT_FOUND);
 }
 
 char	*ft_strchr(const char *str, int c)
@@ -86,7 +86,7 @@ void	ft_free(char **str)
 	free(str);
 }
 
-void error_exit(void)
+void	error_exit(void)
 {
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
@@ -100,7 +100,7 @@ void	get_coordinates(char to_find, char **map, t_player *to_init)
 	{
 		to_init->x = ft_strchr(map[to_init->y], to_find) - map[to_init->y];
 		if (to_init->x >= 1)
-			return;
+			return ;
 		to_init->y++;
 	}
 }
@@ -120,12 +120,6 @@ void	ft_putnbr_fd(int n, int fd)
 	if (tmp > 9)
 		ft_putnbr_fd(tmp / 10, fd);
 	ft_putchar_fd(tmp % 10 + '0', fd);
-}
-
-void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
-{
-	mlx_put_image_to_window(win->mlx, win->win_ptr, to_put.img,
-	x * IMG_SIZE, y * IMG_SIZE);
 }
 
 void	count_and_print_my_moves(t_data *data)

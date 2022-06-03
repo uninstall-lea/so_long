@@ -6,13 +6,13 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:12:22 by lbisson           #+#    #+#             */
-/*   Updated: 2022/05/23 21:29:49 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/03 17:58:31 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-static void set_vars(char **av, t_map *check)
+static void	set_vars(char **av, t_map *check)
 {
 	check->nb_exit = 0;
 	check->nb_player = 0;
@@ -23,10 +23,9 @@ static void set_vars(char **av, t_map *check)
 	if (!check->map)
 		error_exit();
 	check->map[check->nb_lines] = NULL;
-
 }
 
-static void read_and_check_map(char **av, t_map *check)
+static void	read_and_check_map(char **av, t_map *check)
 {
 	int	i;
 	int	fd;
@@ -42,6 +41,7 @@ static void read_and_check_map(char **av, t_map *check)
 	}
 	close(fd);
 }
+
 void	init_map(int ac, char **av, t_map *check)
 {
 	check_args(ac, av);

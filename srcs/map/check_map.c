@@ -6,13 +6,13 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:12:04 by lbisson           #+#    #+#             */
-/*   Updated: 2022/05/23 21:29:45 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/03 18:29:10 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-static int is_elem(char elem)
+static int	is_elem(char elem)
 {
 	if (ft_strchr(ELEMS, elem) == NOT_ELEM)
 		return (NOT_ELEM);
@@ -26,14 +26,14 @@ static int	count_elems(int line, char elem, t_map *check)
 	else if (elem == PLAYER)
 		check->nb_player++;
 	else if (elem == COLLEC)
-		check->nb_collec++; 
+		check->nb_collec++;
 	if (line == check->nb_lines - 1 && (check->nb_exit != 1
-		|| check->nb_player != 1 || check->nb_collec == 0))
+			|| check->nb_player != 1 || check->nb_collec == 0))
 		return (FALSE);
 	return (TRUE);
 }
 
-void	check_map_elems(int line, char *map , t_map *check)
+void	check_map_elems(int line, char *map, t_map *check)
 {
 	int	i;
 
@@ -49,6 +49,21 @@ void	check_map_elems(int line, char *map , t_map *check)
 		error_exit();
 }
 
+static int	is_map_rectangle(char *map, t_map *check)
+{
+	if ((int)ft_strlen(map) - 1 != check->nb_columns)
+		return (FALSE);
+	return (TRUE);
+}
+
+static int	is_map_closed(int line, char c, t_map *check)
+{
+	if (c != BORDER && (line == 0 || check->nb_lines - 1)
+		|| c != BORDER && (line > 0 && line < check->nb_lines))
+		return (FALSE);
+	return (TRUE);
+}
+
 void	check_map_borders(int line, char *map, t_map *check)
 {
 	int	i;
@@ -56,10 +71,10 @@ void	check_map_borders(int line, char *map, t_map *check)
 	i = 0;
 	while (map[i] && map[i] != '\n')
 	{
-		if ((int)ft_strlen(map) - 1 != check->nb_columns
-			|| (map[i] != BORDER && (line == 0 || line == check->nb_lines - 1))
+		if (is_map_rectangle(map, check) == FALSE
+			|| is_map_closed(line, map[i], check == FALSE)
 			|| (line > 0 && line < check->nb_lines
-			&& (map[0] != BORDER || map[ft_strlen(map) - 2] != BORDER)))
+				&& map[ft_strlen(map) - 2] != BORDER))
 			error_exit();
 		i++;
 	}

@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_img.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
+/*   Updated: 2022/06/03 17:53:16 by lbisson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../incs/so_long.h"
 
-static void	convert_all_xpm(char** map, t_window *win, t_textures *set)
+static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
 {
 	set->exit.img = mlx_xpm_file_to_image(win->mlx, set->exit.path,
-						&set->exit.w, &set->exit.h);
+			&set->exit.w, &set->exit.h);
 	set->ground.img = mlx_xpm_file_to_image(win->mlx, set->ground.path,
-						&set->ground.w, &set->ground.h);
+			&set->ground.w, &set->ground.h);
 	set->border.img = mlx_xpm_file_to_image(win->mlx, set->border.path,
-						&set->border.w, &set->border.h);
+			&set->border.w, &set->border.h);
 	set->collec.img = mlx_xpm_file_to_image(win->mlx, set->collec.path,
-						&set->collec.w, &set->collec.h);
+			&set->collec.w, &set->collec.h);
 	set->player.img = mlx_xpm_file_to_image(win->mlx, set->player.path,
-						&set->player.w, &set->player.h);
+			&set->player.w, &set->player.h);
 	set->enemies.img = mlx_xpm_file_to_image(win->mlx, set->enemies.path,
-						&set->enemies.w, &set->enemies.h);
-	if (!set->exit.img || !set->ground.img || !set->border.img || !set->collec.img
-		|| !set->player.img || !set->enemies.img)
+			&set->enemies.w, &set->enemies.h);
+	if (!set->exit.img || !set->ground.img || !set->border.img
+		|| !set->collec.img || !set->player.img || !set->enemies.img)
 	{
 		ft_free(map);
 		destroy_img(win, set);
@@ -38,7 +50,7 @@ void	display_img(char **map, t_window *win, t_textures *set)
 {
 	int			x;
 	int			y;
-	
+
 	y = 0;
 	set_textures(map, win, set);
 	while (y * IMG_SIZE < win->h)
@@ -58,7 +70,7 @@ void	display_img(char **map, t_window *win, t_textures *set)
 				put_img_to_window(x, y, win, set->player);
 			else if (map[y][x] == ENEMIES)
 				put_img_to_window(x, y, win, set->enemies);
-			x++;	
+			x++;
 		}
 		y++;
 	}

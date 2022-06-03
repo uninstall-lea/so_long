@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
+/*   Updated: 2022/06/03 17:59:55 by lbisson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <stdlib.h>
@@ -6,6 +18,9 @@
 # include <stdio.h>
 # include "mlx_linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
+
+# define IMG_SIZE 64
+# define ON_DESTROY 17
 
 /* MAP ELEMS */
 # define ELEMS "01CNEP"
@@ -37,48 +52,48 @@
 # define NOT_ELEM FALSE
 # define CAN_MOVE TRUE
 # define CANT_MOVE FALSE
-# define NO_MORE_COLLECTIBLE_LEFT 0
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
-# define IMG_SIZE 64
+# define NO_MORE_COLLECTIBLE_LEFT 0
 
+/* TYPEDEF */
 typedef void	(*t_fptr)();
 
 typedef struct s_window
 {
-	int		w;
 	int		h;
+	int		w;
 	void	*mlx;
 	void	*win_ptr;
 }			t_window;
 
 typedef struct s_image
 {
-	int		w;
-	int		h;
 	char	*path;
+	int		h;
+	int		w;
 	void	*img;
 }			t_image;
 
 typedef struct s_map
 {
-	int		nb_exit;
-	int		nb_player;
-	int		nb_collec;
-	int		nb_lines;
-	int		nb_columns;
-	char	*str_line;
 	char	**map;
+	char	*str_line;
+	int		nb_collec;
+	int		nb_columns;
+	int		nb_exit;
+	int		nb_lines;
+	int		nb_player;
 }			t_map;
 
 typedef struct s_textures
 {
-	t_image exit;
-	t_image ground;
 	t_image	border;
 	t_image	collec;
-	t_image	player;
 	t_image	enemies;	
+	t_image	player;
+	t_image	exit;
+	t_image	ground;
 }			t_textures;
 
 typedef struct s_player
@@ -89,11 +104,11 @@ typedef struct s_player
 
 typedef struct s_data
 {
-	int		nb_moves;
+	int			nb_moves;
 	t_map		map;
-	t_window	win;
-	t_textures	pack;
 	t_player	player;
+	t_textures	pack;
+	t_window	win;
 }				t_data;
 
 /* STRINGS */
@@ -103,17 +118,19 @@ size_t	ft_strlen(const char *start);
 
 /* MAP */
 void	check_map_borders(int line, char *map, t_map *check);
-void	check_map_elems(int line, char *map , t_map *check);
+void	check_map_elems(int line, char *map, t_map *check);
 void	check_map_size(char **av, t_map *check);
 void	init_map(int ac, char **av, t_map *map);
-void 	check_args(int ac, char **av);
+void	check_args(int ac, char **av);
 
 /* TEXTURES */
 void	display_img(char **map, t_window *win, t_textures *set);
-void    destroy_img(t_window *win, t_textures *pack);
+void	destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
+int		close_window(t_data *data);
 void	open_window(t_window *win, t_map *map);
+void	put_img_to_window(int x, int y, t_window *win, t_image to_put); //la changer de fichier
 
 /* EVENTS */
 int		handle_events(int keycode, t_data *data);
@@ -121,23 +138,21 @@ void	move_up(char **map, t_data *data);
 void	move_left(char **map, t_data *data);
 void	move_down(char **map, t_data *data);
 void	move_right(char **map, t_data *data);
-void	close_window(t_data *data);
 
 /* MOVES ACCESSIBILITY */
 int		check_accessibility(char c, t_data *data);
-int 	decrease(char where, char **map, t_data *data);
-int 	increase(char where, char **map, t_data *data);
-void	check_for_exit(char **map, t_data *data);
+int		decrease(char where, char **map, t_data *data);
+int		increase(char where, char **map, t_data *data);
 void	check_for_collec(char **map, t_data *data);
+void	check_for_exit(char **map, t_data *data);
 
 /* OTHER UTILS */
 int		ft_intchr(int *arr, int size, int to_find);
-void 	error_exit(void);
-void	ft_free(char **str);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putchar_fd(char c, int fd);
 void	count_and_print_my_moves(t_data *data);
+void	ft_free(char **str);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putnbr_fd(int n, int fd);
 void	get_coordinates(char to_find, char **map, t_player *to_init);
-void	put_img_to_window(int x, int y, t_window *win, t_image to_put); //la changer de fichier
+void	error_exit(void);
 
 #endif

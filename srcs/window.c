@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/03 16:50:51 by lbisson           #+#    #+#             */
+/*   Updated: 2022/06/03 16:54:30 by lbisson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/so_long.h"
 
-void	close_window(t_data *data)
+int	close_window(t_data *data)
 {
 	destroy_img(&data->win, &data->pack);
 	mlx_destroy_window(data->win.mlx, data->win.win_ptr);
@@ -17,5 +29,12 @@ void	open_window(t_window *win, t_map *map)
 		error_exit();
 	win->h = map->nb_lines * IMG_SIZE;
 	win->w = map->nb_columns * IMG_SIZE;
-	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h, "Run away from fat_bisson");
+	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h,
+			"Run away from fat_bisson");
+}
+
+void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
+{
+	mlx_put_image_to_window(win->mlx, win->win_ptr, to_put.img,
+		x * IMG_SIZE, y * IMG_SIZE);
 }
