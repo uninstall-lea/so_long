@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 16:50:34 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 21:07:30 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	main(int ac, char **av)
 	init_map(ac, av, &data.map);
 	open_window(&data.win, &data.map);
 	display_img(data.map.map, &data.win, &data.pack);
-	get_coordinates(PLAYER, data.map.map, &data.player);
-	mlx_key_hook(data.win.win_ptr, handle_events, &data);
+	get_coordinates_player(PLAYER, data.map.map, &data.player);
+	mlx_key_hook(data.win.win_ptr, hook_events, &data);
+	mlx_hook(data.win.win_ptr, ON_DESTROY, 0, close_window, &data);
+	mlx_loop_hook(data.win.mlx, enemies_patrol, &data);
 	mlx_loop(data.win.mlx);
 	return (0);
 }

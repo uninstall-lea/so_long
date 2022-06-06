@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 17:03:45 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:58:28 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define GROUND '0'
 # define BORDER '1'
 # define COLLEC 'C'
-# define ENEMIES 'N'
+# define ENEMY 'N'
 # define EXIT 'E'
 # define PLAYER 'P'
 
@@ -45,13 +45,15 @@
 # define D 100
 
 /* DEFINE VALUES */
-# define TRUE 1 
+# define TRUE 1
 # define FALSE 0
 # define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
 # define CAN_MOVE TRUE
 # define CANT_MOVE FALSE
+# define NOT_CLOSED FALSE
+# define NOT_RECTANGLE FALSE
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
 # define NO_MORE_COLLECTIBLE_LEFT 0
@@ -84,13 +86,14 @@ typedef struct s_map
 	int		nb_exit;
 	int		nb_lines;
 	int		nb_player;
+	int		nb_enemy;
 }			t_map;
 
 typedef struct s_textures
 {
 	t_image	border;
 	t_image	collec;
-	t_image	enemies;	
+	t_image	enemy;	
 	t_image	player;
 	t_image	exit;
 	t_image	ground;
@@ -102,13 +105,20 @@ typedef struct s_player
 	long int	y;
 }			t_player;
 
+typedef struct s_enemy
+{
+	long int x;
+	long int y;
+}			t_enemy;
+
 typedef struct s_data
 {
 	int			nb_moves;
-	t_map		map;
-	t_player	player;
-	t_textures	pack;
 	t_window	win;
+	t_map		map;
+	t_textures	pack;
+	t_enemy		enemy;
+	t_player	player;
 }				t_data;
 
 /* STRINGS */
@@ -117,11 +127,10 @@ char	*ft_strstr(char *str, char *to_find);
 size_t	ft_strlen(const char *start);
 
 /* MAP */
-void	check_map_borders(int line, char *map, t_map *check);
-void	check_map_elems(int line, char *map, t_map *check);
-void	check_map_size(char **av, t_map *check);
 void	init_map(int ac, char **av, t_map *map);
-void	check_args(int ac, char **av);
+void	check_arg(int ac, char **av, t_map *check);
+void	check_map_elems(int line, char *map, t_map *check);
+void	check_map_borders(int line, char *map, t_map *check);
 
 /* TEXTURES */
 void	display_img(char **map, t_window *win, t_textures *set);
@@ -135,7 +144,7 @@ void	open_window(t_window *win, t_map *map);
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */
-int		handle_events(int keycode, t_data *data);
+int		hook_events(int keycode, t_data *data);
 void	move_up(char **map, t_data *data);
 void	move_left(char **map, t_data *data);
 void	move_down(char **map, t_data *data);
@@ -154,7 +163,7 @@ void	count_and_print_my_moves(t_data *data);
 void	ft_free(char **str);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	get_coordinates(char to_find, char **map, t_player *to_init);
-void	error_exit(void);
+void	get_coordinates_player(char to_find, char **map, t_player *to_init);
+void	error_exit(int error);
 
 #endif

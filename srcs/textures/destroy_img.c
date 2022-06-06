@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:48:59 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 18:07:13 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:58:20 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	destroy_img(t_window *win, t_textures *pack)
 		mlx_destroy_image(win->mlx, pack->collec.img);
 	if (pack->player.img)
 		mlx_destroy_image(win->mlx, pack->player.img);
-	if (pack->enemies.img)
-		mlx_destroy_image(win->mlx, pack->enemies.img);
+	if (pack->enemy.img)
+		mlx_destroy_image(win->mlx, pack->enemy.img);
 }	

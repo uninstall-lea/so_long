@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   enemy_patrol.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 20:56:27 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 17:54:13 by lbisson          ###   ########.fr       */
+/*   Created: 2022/06/06 18:47:24 by lbisson           #+#    #+#             */
+/*   Updated: 2022/06/06 18:55:06 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include "../incs/so_long.h"
 
-static int	check_type_of_arg(char **av)
+void	enemy_patrol(t_data *data)
 {
-	if (ft_strlen(ft_strstr(av[1], ".ber")) != ft_strlen(".ber"))
-		return (FALSE);
-	return (TRUE);
-}
+	int		i;
+	t_enemy *enemy;
 
-void	check_args(int ac, char **av)
-{
-	if (ac != 2)
-		error_exit();
-	else if (check_type_of_arg(av) == FALSE)
-		error_exit();
+	enemy = malloc(sizeof(t_enemy) * data->map.nb_enemy);
+	if (!enemy)
+		error_exit(1);
+	i = 0;
+	while (i < data->map.nb_enemy)
+	{
+		get_coordinates_enemy(ENEMY, data->map.map, &enemy[i]);
+		i++;
+	}
+	i = 0;
 }

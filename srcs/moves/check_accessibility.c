@@ -50,7 +50,7 @@ int	decrease(char where, char **map, t_data *data)
 
 int	increase(char where, char **map, t_data *data)
 {
-	if (where == 'y' && map[(data->player.y) + 1][data->player.x])
+	if (where == 'y' && map[data->player.y + 1][data->player.x])
 		return (check_accessibility(map[data->player.y + 1][data->player.x],
 			data));
 	else if (where == 'x')

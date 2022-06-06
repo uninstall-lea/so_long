@@ -6,10 +6,11 @@ NAME =		so_long
 SRCS =		srcs/trash.c					\
 			srcs/window.c					\
 			srcs/so_long.c					\
-			srcs/handle_events.c			\
+			srcs/hook_events.c				\
 			srcs/map/init_map.c				\
-			srcs/map/check_map.c			\
-			srcs/map/check_args.c			\
+			srcs/map/check_arg.c			\
+			srcs/map/check_map_elems.c		\
+			srcs/map/check_map_borders.c	\
 			srcs/moves/move_player.c		\
 			srcs/moves/check_accessibility.c\
 			srcs/textures/display_img.c		\

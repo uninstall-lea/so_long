@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 17:53:16 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 19:33:09 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
 			&set->collec.w, &set->collec.h);
 	set->player.img = mlx_xpm_file_to_image(win->mlx, set->player.path,
 			&set->player.w, &set->player.h);
-	set->enemies.img = mlx_xpm_file_to_image(win->mlx, set->enemies.path,
-			&set->enemies.w, &set->enemies.h);
+	set->enemy.img = mlx_xpm_file_to_image(win->mlx, set->enemy.path,
+			&set->enemy.w, &set->enemy.h);
 	if (!set->exit.img || !set->ground.img || !set->border.img
-		|| !set->collec.img || !set->player.img || !set->enemies.img)
+		|| !set->collec.img || !set->player.img || !set->enemy.img)
 	{
 		ft_free(map);
 		destroy_img(win, set);
-		error_exit();
+		error_exit(6);
 	}
 }
 
@@ -42,7 +42,7 @@ static void	set_textures(char **map, t_window *win, t_textures *set)
 	set->exit.path = "./srcs/textures/rainbow_dash.xpm";
 	set->border.path = "./srcs/textures/malicious_star.xpm";
 	set->player.path = "./srcs/textures/lbisson_de_noel.xpm";
-	set->enemies.path = "./srcs/textures/evil_fat_bisson.xpm";
+	set->enemy.path = "./srcs/textures/evil_fat_bisson.xpm";
 	convert_all_xpm(map, win, set);
 }
 
@@ -68,8 +68,8 @@ void	display_img(char **map, t_window *win, t_textures *set)
 				put_img_to_window(x, y, win, set->collec);
 			else if (map[y][x] == PLAYER)
 				put_img_to_window(x, y, win, set->player);
-			else if (map[y][x] == ENEMIES)
-				put_img_to_window(x, y, win, set->enemies);
+			else if (map[y][x] == ENEMY)
+				put_img_to_window(x, y, win, set->enemy);
 			x++;
 		}
 		y++;

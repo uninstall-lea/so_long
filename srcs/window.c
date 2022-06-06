@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:51 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 18:21:35 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:54:38 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	open_window(t_window *win, t_map *map)
 {
 	win->mlx = mlx_init();
 	if (!win->mlx)
-		error_exit();
+		error_exit(1);
 	win->h = map->nb_lines * IMG_SIZE;
 	win->w = map->nb_columns * IMG_SIZE;
 	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h,
@@ -49,4 +49,10 @@ void	move_player_on_window(t_data *data)
 {
 	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.player.img,
 		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
+}
+
+void	move_enemy_on_window(t_data *data)
+{
+	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.enemy.img,
+		data->enemy.x * IMG_SIZE, data->enemy.y * IMG_SIZE);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_events.c                                    :+:      :+:    :+:   */
+/*   hook_events.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:54:51 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 18:07:09 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:41:32 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_fptr	dispatch(int keycode)
 	return (event[index]);
 }
 
-int	handle_events(int keycode, t_data *data)
+int	hook_events(int keycode, t_data *data)
 {
 	t_fptr	event;
 
@@ -34,7 +34,5 @@ int	handle_events(int keycode, t_data *data)
 		(*event)(data->map.map, data);
 	else if (keycode == ESC)
 		close_window(data);
-	else
-		mlx_hook(data->win.win_ptr, ON_DESTROY, 0, close_window, data);
 	return (0);
 }

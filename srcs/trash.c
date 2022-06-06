@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 16:52:42 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 20:49:43 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,41 @@ void	ft_free(char **str)
 	free(str);
 }
 
-void	error_exit(void)
+void	error_exit(int error)
 {
-	write(2, "Error\n", 6);
+	if (error == 1)
+		write(2, "ERROR[1] : Wrong malloc\n", 24);
+	else if (error == 2)
+		write(2, "ERROR[2] : Wrong map size\n", 26);
+	else if (error == 3)
+		write(2, "ERROR[3] : Given arg is not a '.ber' \n", 38);
+	else if (error == 4)
+		write(2, "ERROR[4] : Wrong number of arg(s) given\n", 40);	
+	else if (error == 5)
+		write(2, "ERROR[5] : Map is not closed or rectangle\n", 42);
+	else if (error == 6)
+		write(2, "ERROR[6] : One image (or more) couldn't be found\n", 49);
+	else if (error == 7)
+		write(2, "ERROR[7] : One elem (or more) has not the right value\n", 54);
+	else if (error == 8)
+		write(2, "ERROR[8] : One char on the map (or more) is not an elem\n", 56);
 	exit(EXIT_FAILURE);
 }
 
-void	get_coordinates(char to_find, char **map, t_player *to_init)
+void	get_coordinates_player(char to_find, char **map, t_player *to_init)
+{
+	to_init->y = 0;
+	to_init->x = 0;
+	while (map[to_init->y])
+	{
+		to_init->x = ft_strchr(map[to_init->y], to_find) - map[to_init->y];
+		if (to_init->x >= 1)
+			return ;
+		to_init->y++;
+	}
+}
+
+void	get_coordinates_enemy(char to_find, char **map, t_player *to_init)
 {
 	to_init->y = 0;
 	to_init->x = 0;
