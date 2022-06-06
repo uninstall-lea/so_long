@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:51 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 16:54:30 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 18:21:35 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,23 @@ void	open_window(t_window *win, t_map *map)
 	win->h = map->nb_lines * IMG_SIZE;
 	win->w = map->nb_columns * IMG_SIZE;
 	win->win_ptr = mlx_new_window(win->mlx, win->w, win->h,
-			"Run away from fat_bisson");
+			"Run away from evil_fat_bisson RGB editon");
 }
 
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
 {
 	mlx_put_image_to_window(win->mlx, win->win_ptr, to_put.img,
 		x * IMG_SIZE, y * IMG_SIZE);
+}
+
+void	move_ground_on_window(t_data *data)
+{
+	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
+		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
+}
+
+void	move_player_on_window(t_data *data)
+{
+	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.player.img,
+		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
 }

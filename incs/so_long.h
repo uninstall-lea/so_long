@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/03 17:59:55 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:03:45 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,10 @@ void	destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
 int		close_window(t_data *data);
+void	move_ground_on_window(t_data *data);
+void	move_player_on_window(t_data *data);
 void	open_window(t_window *win, t_map *map);
-void	put_img_to_window(int x, int y, t_window *win, t_image to_put); //la changer de fichier
+void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */
 int		handle_events(int keycode, t_data *data);
