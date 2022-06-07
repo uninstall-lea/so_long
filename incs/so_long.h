@@ -6,16 +6,17 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 20:58:28 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:17:06 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# include <time.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
-# include <stdio.h>
 # include "mlx_linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
 
@@ -23,13 +24,13 @@
 # define ON_DESTROY 17
 
 /* MAP ELEMS */
-# define ELEMS "01CNEP"
+# define EXIT 'E'
+# define ENEMY 'N'
 # define GROUND '0'
 # define BORDER '1'
 # define COLLEC 'C'
-# define ENEMY 'N'
-# define EXIT 'E'
 # define PLAYER 'P'
+# define ELEMS "01CNEP"
 
 /* KEYCODE */
 # define ESC 65307
@@ -47,6 +48,8 @@
 /* DEFINE VALUES */
 # define TRUE 1
 # define FALSE 0
+# define YES TRUE
+# define NO FALSE
 # define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
@@ -79,7 +82,7 @@ typedef struct s_image
 
 typedef struct s_map
 {
-	char	**map;
+	char	**str_map;
 	char	*str_line;
 	int		nb_collec;
 	int		nb_columns;
@@ -103,6 +106,7 @@ typedef struct s_player
 {
 	long int	x;
 	long int	y;
+	int			nb_moves;
 }			t_player;
 
 typedef struct s_enemy
@@ -111,9 +115,17 @@ typedef struct s_enemy
 	long int y;
 }			t_enemy;
 
+typedef struct s_time
+{
+
+	clock_t begin;
+	clock_t end;
+	int	current;
+	int previous;
+}				t_time;
+
 typedef struct s_data
 {
-	int			nb_moves;
 	t_window	win;
 	t_map		map;
 	t_textures	pack;
@@ -151,14 +163,12 @@ void	move_down(char **map, t_data *data);
 void	move_right(char **map, t_data *data);
 
 /* MOVES ACCESSIBILITY */
-int		check_accessibility(char c, t_data *data);
-int		decrease(char where, char **map, t_data *data);
-int		increase(char where, char **map, t_data *data);
-void	check_for_collec(char **map, t_data *data);
-void	check_for_exit(char **map, t_data *data);
+int		can_i_go_to_poney(char **map, t_player *player, t_data *data);
+int		increase_P(char where, char **map, t_player *player, t_data *data);
+int		decrease_P(char where, char **map, t_player *player, t_data *data);
 
 /* OTHER UTILS */
-int		ft_intchr(int *arr, int size, int to_find);
+int		find_index(int *arr, int size, int to_find);
 void	count_and_print_my_moves(t_data *data);
 void	ft_free(char **str);
 void	ft_putchar_fd(char c, int fd);

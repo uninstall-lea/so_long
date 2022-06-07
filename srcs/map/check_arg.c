@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 20:56:27 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 20:36:52 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/07 15:19:36 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	check_arg(int ac, char **av, t_map *check)
 	else if (check_type_of_arg(av) == FALSE)
 		error_exit(3);
 	check_map_size(av, check);
-//	printf("nb lines : %d\n", check->nb_lines);
 	if (check->nb_lines <= 2)
 		error_exit(2);
 }

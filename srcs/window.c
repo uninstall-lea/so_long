@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:51 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 20:54:38 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/07 17:19:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	close_window(t_data *data)
 	destroy_img(&data->win, &data->pack);
 	mlx_destroy_window(data->win.mlx, data->win.win_ptr);
 	mlx_destroy_display(data->win.mlx);
-	ft_free(data->map.map);
+	ft_free(data->map.str_map);
 	free(data->win.mlx);
 	exit(EXIT_SUCCESS);
 }

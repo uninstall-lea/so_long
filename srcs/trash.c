@@ -6,13 +6,13 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 20:49:43 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/07 18:09:22 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/so_long.h"
 
-int	ft_intchr(int *arr, int size, int to_find)
+int	find_index(int *arr, int size, int to_find)
 {
 	int	i;
 
@@ -111,6 +111,7 @@ void	get_coordinates_player(char to_find, char **map, t_player *to_init)
 {
 	to_init->y = 0;
 	to_init->x = 0;
+	to_init->nb_moves = 0;
 	while (map[to_init->y])
 	{
 		to_init->x = ft_strchr(map[to_init->y], to_find) - map[to_init->y];
@@ -152,6 +153,6 @@ void	ft_putnbr_fd(int n, int fd)
 
 void	count_and_print_my_moves(t_data *data)
 {
-	ft_putnbr_fd(++data->nb_moves, 1);
+	ft_putnbr_fd(++data->player.nb_moves, 1);
 	write(1, "\n", 1);
 }
