@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/07 18:17:06 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/09 17:45:46 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
 # define NO_MORE_COLLECTIBLE_LEFT 0
+# define BANG_BANG_THEY_SHOT_ME_DOWN 666
 
 /* TYPEDEF */
 typedef void	(*t_fptr)();
@@ -111,6 +112,7 @@ typedef struct s_player
 
 typedef struct s_enemy
 {
+	int	dir;
 	long int x;
 	long int y;
 }			t_enemy;
@@ -129,8 +131,9 @@ typedef struct s_data
 	t_window	win;
 	t_map		map;
 	t_textures	pack;
+	t_time		time;	
 	t_enemy		enemy;
-	t_player	player;
+	t_player	player;	
 }				t_data;
 
 /* STRINGS */
@@ -175,5 +178,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	get_coordinates_player(char to_find, char **map, t_player *to_init);
 void	error_exit(int error);
+
+/* THE BAD GUYS */
+int		pat_patrouille(t_data *data);
+void	move_enemy_on_window(t_data *data);
+void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
 
 #endif

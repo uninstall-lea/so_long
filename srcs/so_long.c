@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/07 17:29:23 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/09 17:43:13 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	get_coordinates_player(PLAYER, data.map.str_map, &data.player);
 	mlx_key_hook(data.win.win_ptr, hook_events, &data);
 	mlx_hook(data.win.win_ptr, ON_DESTROY, 0, close_window, &data);
-//	mlx_loop_hook(data.win.mlx, pat_patrouille, &data);
+	mlx_loop_hook(data.win.mlx, pat_patrouille, &data);
 	mlx_loop(data.win.mlx);
 	return (0);
 }

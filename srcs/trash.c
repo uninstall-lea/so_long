@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/07 18:09:22 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/09 16:11:11 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	get_coordinates_player(char to_find, char **map, t_player *to_init)
 	}
 }
 
-void	get_coordinates_enemy(char to_find, char **map, t_player *to_init)
+void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init)
 {
 	to_init->y = 0;
 	to_init->x = 0;

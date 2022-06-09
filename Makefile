@@ -7,12 +7,13 @@ SRCS =		srcs/trash.c					\
 			srcs/window.c					\
 			srcs/so_long.c					\
 			srcs/hook_events.c				\
+			srcs/pat_patrouille.c			\
 			srcs/map/init_map.c				\
 			srcs/map/check_arg.c			\
 			srcs/map/check_map_elems.c		\
 			srcs/map/check_map_borders.c	\
 			srcs/moves/move_player.c		\
-			srcs/moves/check_if_access.c\
+			srcs/moves/check_if_access.c	\
 			srcs/textures/display_img.c		\
 			srcs/textures/destroy_img.c		\
 			srcs/gnl/get_next_line.c		\
