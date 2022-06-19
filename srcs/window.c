@@ -40,14 +40,16 @@ void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
 		x * IMG_SIZE, y * IMG_SIZE);
 }
 
-void	move_ground_on_window(char who, t_data *data)
+void	move_ground_on_window_P(t_data *data)
 {
-	if (who == 'P')
+	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
+		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
+}
+
+void	move_ground_on_window_E(t_enemy *enemy, t_data *data)
+{
 		mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
-			data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
-	if (who == 'E')
-		mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
-			data->enemy->x * IMG_SIZE, data->enemy->y * IMG_SIZE);
+			enemy->x * IMG_SIZE, enemy->y * IMG_SIZE);
 }
 
 void	move_player_on_window(t_data *data)
@@ -56,8 +58,8 @@ void	move_player_on_window(t_data *data)
 		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
 }
 
-void	move_enemy_on_window(t_data *data)
+void	move_enemy_on_window(t_enemy *enemy, t_data *data)
 {
 	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.enemy.img,
-		data->enemy->x * IMG_SIZE, data->enemy->y * IMG_SIZE);
+		enemy->x * IMG_SIZE, enemy->y * IMG_SIZE);
 }

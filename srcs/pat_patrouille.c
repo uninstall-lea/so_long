@@ -50,7 +50,7 @@ static void set_up_enemies(t_data *data)
 
 static int increase_E(char **map, t_enemy *enemy)
 {
-	if (ft_strchr("1CEN", map[enemy->y][enemy->x + 1]) == OBSTACLE)
+	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x + 1]))
 		return (CANT_MOVE);
 	return (CAN_MOVE);
 }
@@ -58,7 +58,7 @@ static int increase_E(char **map, t_enemy *enemy)
 static int decrease_E(char **map, t_enemy *enemy)
 {
 	printf("%c\n", map[enemy->y][enemy->x - 1]);
-	if (ft_strchr("1CEN", map[enemy->y][enemy->x - 1]) == OBSTACLE)
+	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x - 1]))
 		return (CANT_MOVE);
 	return (CAN_MOVE);
 }
@@ -71,31 +71,44 @@ static void if_obstacle_change_dir(t_enemy *enemy)
 		enemy->dir = LEFT;
 }
 
-static void	move_enemy(t_enemy *enemy, t_data *data)
+static void	check_if_loose(char **map, t_enemy *enemy, t_data *data)
+{
+	if (ft_strchr("P", map[enemy->y][enemy->x]))
+	{
+		move_enemy_on_window(enemy, data);
+		write(2, "HAHA ! YOU LOST !\n", 19);
+		close_window(data);
+	}
+}
+
+static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 {
 	if (enemy->dir == LEFT)
 	{
-		printf("jaime largent\n");
-		printf("res: %d\n", decrease_E(data->map.str_map, enemy));
-		if (decrease_E(data->map.str_map, enemy) == CAN_MOVE)
+		if (decrease_E(map, enemy) == CAN_MOVE)
 		{	
-			printf("vivement noel\n");
-			move_ground_on_window('E', data);
+			move_ground_on_window_E(enemy, data);
 			enemy->x--;
-			move_enemy_on_window(data);
+			check_if_loose(map, enemy, data);
+			map[enemy->y][enemy->x] = 'N';
+			map[enemy->y][enemy->x + 1] = '0';
+			move_enemy_on_window(enemy, data);
+			return ;
 		}
 		else
 			if_obstacle_change_dir(enemy);
 	}
 	else if (enemy->dir == RIGHT)
 	{
-		printf("jai mal au burnes\n");
-		if (increase_E(data->map.str_map, enemy) == CAN_MOVE)
+		if (increase_E(map, enemy) == CAN_MOVE)
 		{
-			printf("bonjour mes cacahuetes");
-			move_ground_on_window('E', data);
+			move_ground_on_window_E(enemy, data);
 			enemy->x++;
-			move_enemy_on_window(data);
+			check_if_loose(map, enemy, data);
+			map[enemy->y][enemy->x] = 'N';
+			map[enemy->y][enemy->x - 1] = '0';
+			move_enemy_on_window(enemy, data);
+			return ;
 		}
 		else
 			if_obstacle_change_dir(enemy);
@@ -109,12 +122,9 @@ static void	patrol(t_enemy *enemy, t_data *data)
 	i = 0;
 	if (has_enough_time_passed(&data->time) == YES)
 	{
-		printf("yes\n");
 		while (i < data->map.nb_enemy)
 		{
-			printf("enemy[%d] -> y : %ld / x : %ld\n", i, enemy[i].y, enemy[i].x);
-			move_enemy(&enemy[i], data);
-			printf("enemy[%d] -> y : %ld / x : %ld\n", i, enemy[i].y, enemy[i].x);
+			move_enemy(data->map.str_map, &enemy[i], data);
 			i++;
 		}
 	}

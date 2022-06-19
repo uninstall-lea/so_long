@@ -31,6 +31,7 @@
 # define COLLEC 'C'
 # define PLAYER 'P'
 # define ELEMS "01CNEP"
+# define OBSTACLE "1CEN"
 
 /* KEYCODE */
 # define ESC 65307
@@ -50,7 +51,6 @@
 # define FALSE 0
 # define YES TRUE
 # define NO FALSE
-# define OBSTACLE NULL
 # define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
@@ -156,7 +156,8 @@ void	destroy_img(t_window *win, t_textures *pack);
 int		close_window(t_data *data);
 void	move_player_on_window(t_data *data);
 void	open_window(t_window *win, t_map *map);
-void	move_ground_on_window(char who, t_data *data);
+void	move_ground_on_window_P(t_data *data);
+void	move_ground_on_window_E(t_enemy *enemy, t_data *data);
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */
@@ -182,7 +183,7 @@ void	error_exit(int error);
 
 /* THE BAD GUYS */
 int		pat_patrouille(t_data *data);
-void	move_enemy_on_window(t_data *data);
+void	move_enemy_on_window(t_enemy *enemy, t_data *data);
 void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
 
 #endif
