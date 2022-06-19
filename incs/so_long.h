@@ -50,6 +50,7 @@
 # define FALSE 0
 # define YES TRUE
 # define NO FALSE
+# define OBSTACLE NULL
 # define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
@@ -60,7 +61,7 @@
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
 # define NO_MORE_COLLECTIBLE_LEFT 0
-# define BANG_BANG_THEY_SHOT_ME_DOWN 666
+# define BANG_BANG_YOU_SHOT_ME_DOWN 666
 
 /* TYPEDEF */
 typedef void	(*t_fptr)();
@@ -132,7 +133,7 @@ typedef struct s_data
 	t_map		map;
 	t_textures	pack;
 	t_time		time;	
-	t_enemy		enemy;
+	t_enemy		*enemy;
 	t_player	player;	
 }				t_data;
 
@@ -153,9 +154,9 @@ void	destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
 int		close_window(t_data *data);
-void	move_ground_on_window(t_data *data);
 void	move_player_on_window(t_data *data);
 void	open_window(t_window *win, t_map *map);
+void	move_ground_on_window(char who, t_data *data);
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */

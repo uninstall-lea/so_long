@@ -19,6 +19,7 @@ int	close_window(t_data *data)
 	mlx_destroy_display(data->win.mlx);
 	ft_free(data->map.str_map);
 	free(data->win.mlx);
+	free(data->enemy);
 	exit(EXIT_SUCCESS);
 }
 
@@ -39,10 +40,14 @@ void	put_img_to_window(int x, int y, t_window *win, t_image to_put)
 		x * IMG_SIZE, y * IMG_SIZE);
 }
 
-void	move_ground_on_window(t_data *data)
+void	move_ground_on_window(char who, t_data *data)
 {
-	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
-		data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
+	if (who == 'P')
+		mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
+			data->player.x * IMG_SIZE, data->player.y * IMG_SIZE);
+	if (who == 'E')
+		mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.ground.img,
+			data->enemy->x * IMG_SIZE, data->enemy->y * IMG_SIZE);
 }
 
 void	move_player_on_window(t_data *data)
@@ -54,5 +59,5 @@ void	move_player_on_window(t_data *data)
 void	move_enemy_on_window(t_data *data)
 {
 	mlx_put_image_to_window(data->win.mlx, data->win.win_ptr, data->pack.enemy.img,
-		data->enemy.x * IMG_SIZE, data->enemy.y * IMG_SIZE);
+		data->enemy->x * IMG_SIZE, data->enemy->y * IMG_SIZE);
 }

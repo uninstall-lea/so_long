@@ -17,7 +17,7 @@ static void	if_collec(char *c, t_data *data)
 		data->map.nb_collec--;
 }
 
-static int	check_if_access(char c, t_data *data)
+static int	check_if_access_P(char c, t_data *data)
 {
 	if (c == BORDER
 		|| (c == EXIT && data->map.nb_collec > 0))
@@ -30,17 +30,17 @@ static int	check_if_access(char c, t_data *data)
 int	decrease_P(char where, char **map, t_player *player, t_data *data)
 {
 	if (where == 'y')
-		return (check_if_access(map[player->y - 1][player->x], data));
+		return (check_if_access_P(map[player->y - 1][player->x], data));
 	else if (where == 'x')
-		return (check_if_access(map[player->y][player->x - 1], data));
+		return (check_if_access_P(map[player->y][player->x - 1], data));
 	return (CANT_MOVE);
 }
 
 int	increase_P(char where, char **map, t_player *player, t_data *data)
 {
 	if (where == 'y' && map[player->y + 1][player->x])
-		return (check_if_access(map[player->y + 1][player->x], data));
+		return (check_if_access_P(map[player->y + 1][player->x], data));
 	else if (where == 'x')
-		return (check_if_access(map[player->y][player->x + 1],  data));
+		return (check_if_access_P(map[player->y][player->x + 1],  data));
 	return (CANT_MOVE);
 }

@@ -16,7 +16,7 @@ void	move_up(char **map, t_data *data)
 {
 	if (decrease_P('y', map, &data->player, data) == CAN_MOVE)
 	{
-		move_ground_on_window(data);
+		move_ground_on_window('P', data);
 		data->player.y--;
 		can_i_go_to_poney(map, &data->player, data);
 		move_player_on_window(data);
@@ -28,7 +28,7 @@ void	move_left(char **map, t_data *data)
 {
 	if (decrease_P('x', map, &data->player, data) == CAN_MOVE)
 	{
-		move_ground_on_window(data);
+		move_ground_on_window('P', data);
 		data->player.x--;
 		can_i_go_to_poney(map, &data->player, data);
 		move_player_on_window(data);
@@ -40,7 +40,7 @@ void	move_down(char **map, t_data *data)
 {
 	if (increase_P('y', map, &data->player, data) == CAN_MOVE)
 	{
-		move_ground_on_window(data);
+		move_ground_on_window('P', data);
 		data->player.y++;
 		can_i_go_to_poney(map, &data->player, data);
 		move_player_on_window(data);
@@ -52,7 +52,7 @@ void	move_right(char **map, t_data *data)
 {
 	if (increase_P('x', map, &data->player, data) == CAN_MOVE)
 	{
-		move_ground_on_window(data);
+		move_ground_on_window('P', data);
 		data->player.x++;
 		can_i_go_to_poney(map, &data->player, data);
 		move_player_on_window(data);

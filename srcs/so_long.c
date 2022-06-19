@@ -15,7 +15,7 @@
 int	main(int ac, char **av)
 {
 	t_data		data;
-
+	
 	init_map(ac, av, &data.map);
 	open_window(&data.win, &data.map);
 	display_img(data.map.str_map, &data.win, &data.pack);

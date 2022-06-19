@@ -15,6 +15,7 @@
 static void	set_up_vars(t_map *set)
 {
 	set->nb_exit = 0;
+	set->nb_enemy = 0;
 	set->nb_player = 0;
 	set->nb_collec = 0;
 	set->str_map = malloc(sizeof(char *) * (set->nb_lines + 1));
