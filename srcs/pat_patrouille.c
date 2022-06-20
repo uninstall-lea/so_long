@@ -71,16 +71,6 @@ static void if_obstacle_change_dir(t_enemy *enemy)
 		enemy->dir = LEFT;
 }
 
-static void	check_if_loose(char **map, t_enemy *enemy, t_data *data)
-{
-	if (ft_strchr("P", map[enemy->y][enemy->x]))
-	{
-		move_enemy_on_window(enemy, data);
-		write(2, "HAHA ! YOU LOST !\n", 19);
-		close_window(data);
-	}
-}
-
 static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 {
 	if (enemy->dir == LEFT)
@@ -89,7 +79,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 		{	
 			move_ground_on_window_E(enemy, data);
 			enemy->x--;
-			check_if_loose(map, enemy, data);
+			check_if_loose_E(map, enemy, data);
 			map[enemy->y][enemy->x] = 'N';
 			map[enemy->y][enemy->x + 1] = '0';
 			move_enemy_on_window(enemy, data);
@@ -104,7 +94,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 		{
 			move_ground_on_window_E(enemy, data);
 			enemy->x++;
-			check_if_loose(map, enemy, data);
+			check_if_loose_E(map, enemy, data);
 			map[enemy->y][enemy->x] = 'N';
 			map[enemy->y][enemy->x - 1] = '0';
 			move_enemy_on_window(enemy, data);
