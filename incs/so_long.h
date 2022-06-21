@@ -6,12 +6,13 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 14:18:47 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/21 17:46:54 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
 # include <time.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -20,8 +21,14 @@
 # include "mlx_linux/mlx.h"
 # include "../srcs/gnl/get_next_line.h"
 
+/* DEFINE VALUES */
+# define TRUE 1
+# define FALSE 0
 # define IMG_SIZE 64
 # define ON_DESTROY 17
+# define NOT_FOUND 404
+# define NO_MORE_COLLECTIBLE_LEFT 0
+# define BANG_BANG_YOU_SHOT_ME_DOWN 666
 
 /* MAP ELEMS */
 # define EXIT 'E'
@@ -46,12 +53,9 @@
 # define RIGHT 65363
 # define D 100
 
-/* DEFINE VALUES */
-# define TRUE 1
-# define FALSE 0
+/* DEFINE KEYWORD */
 # define YES TRUE
 # define NO FALSE
-# define NOT_FOUND 404
 # define IS_ELEM TRUE
 # define NOT_ELEM FALSE
 # define CAN_MOVE TRUE
@@ -60,12 +64,13 @@
 # define NOT_RECTANGLE FALSE
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
-# define NO_MORE_COLLECTIBLE_LEFT 0
-# define BANG_BANG_YOU_SHOT_ME_DOWN 666
+
 
 /* TYPEDEF */
 typedef void	(*t_fptr)();
 
+
+/* STRUCTS */
 typedef struct s_window
 {
 	int		h;
@@ -137,13 +142,8 @@ typedef struct s_data
 	t_player	player;	
 }				t_data;
 
-void	loose_if_P_walk_on_E(char **map, t_player *player, t_data *data);
 
-/* STRINGS */
-char	*ft_strchr(const char *str, int c);
-char	*ft_strstr(char *str, char *to_find);
-size_t	ft_strlen(const char *start);
-
+/* PROTOTYPES */
 /* MAP */
 void	init_map(int ac, char **av, t_map *map);
 void	check_arg(int ac, char **av, t_map *check);
@@ -156,10 +156,7 @@ void	destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
 int		close_window(t_data *data);
-void	move_player_on_window(t_data *data);
 void	open_window(t_window *win, t_map *map);
-void	move_ground_on_window_P(t_data *data);
-void	move_ground_on_window_E(t_enemy *enemy, t_data *data);
 void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */
@@ -169,25 +166,41 @@ void	move_left(char **map, t_data *data);
 void	move_down(char **map, t_data *data);
 void	move_right(char **map, t_data *data);
 
-/* MOVES ACCESSIBILITY */
+/* PLAYER */
 int		can_i_go_to_poney(char **map, t_player *player, t_data *data);
 int		increase_P(char where, char **map, t_player *player, t_data *data);
 int		decrease_P(char where, char **map, t_player *player, t_data *data);
-
-/* OTHER UTILS */
-int		find_index(int *arr, int size, int to_find);
-void	count_and_print_my_moves(t_data *data);
-void	ft_free(char **str);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
+void	loose_if_P_walk_on_E(char **map, t_player *p, t_data *data);
+void	update_map_for_P(char where, char how, char **map, t_player *p);
 void	get_coordinates_player(char to_find, char **map, t_player *to_init);
-void	error_exit(int error);
-void	loose_if_E_walk_on_P(char **map, t_enemy *enemy, t_data *data);
-void	loose_if_P_walk_on_E(char **map, t_player *player, t_data *data);
 
 /* THE BAD GUYS */
 int		pat_patrouille(t_data *data);
-void	move_enemy_on_window(t_enemy *enemy, t_data *data);
+int		has_enough_time_passed(t_time *time);
+int 	increase_E(char **map, t_enemy *enemy);
+int 	decrease_E(char **map, t_enemy *enemy);
+void 	if_obstacle_change_dir(t_enemy *enemy);
+void	update_map_for_E(char how, char **map, t_enemy *e);
+void	loose_if_E_walk_on_P(char **map, t_enemy *e, t_data *data);
 void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
+
+/* MOVE IMG */
+void	move_player_on_window(t_data *data);
+void	move_enemy_on_window(t_enemy *enemy, t_data *data);
+void	move_ground_on_window_P(t_data *data);
+void	move_ground_on_window_E(t_enemy *enemy, t_data *data);
+
+/* UTILS */
+	/* ARRAY */
+int		find_index(int *arr, int size, int to_find);
+char	*ft_strchr(const char *str, int c);
+char	*ft_strstr(char *str, char *to_find);
+size_t	ft_strlen(const char *start);
+void	ft_free(char **str);
+	/* PRINT */
+void	count_and_print_my_moves(t_data *data);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	error_exit(int error);
 
 #endif

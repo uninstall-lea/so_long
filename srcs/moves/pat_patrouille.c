@@ -10,19 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/so_long.h"
-
-static int	has_enough_time_passed(t_time *time)
-{
-	time->end = clock();
-	time->current = (time->end - time->begin) / (CLOCKS_PER_SEC / 2);
-	if (time->previous != time->current)
-	{
-		time->previous = time->current;
-		return (YES);
-	}
-	return (NO);
-}
+#include "../../incs/so_long.h"
 
 static void set_up_time(t_time *time)
 {
@@ -47,28 +35,6 @@ static void set_up_enemies(t_data *data)
 	}
 }
 
-static int increase_E(char **map, t_enemy *enemy)
-{
-	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x + 1]))
-		return (CANT_MOVE);
-	return (CAN_MOVE);
-}
-
-static int decrease_E(char **map, t_enemy *enemy)
-{
-	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x - 1]))
-		return (CANT_MOVE);
-	return (CAN_MOVE);
-}
-
-static void if_obstacle_change_dir(t_enemy *enemy)
-{
-	if (enemy->dir == LEFT)
-		enemy->dir = RIGHT;
-	else if (enemy->dir == RIGHT)
-		enemy->dir = LEFT;
-}
-
 static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 {
 	if (enemy->dir == LEFT)
@@ -78,8 +44,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 			move_ground_on_window_E(enemy, data);
 			enemy->x--;
 			loose_if_E_walk_on_P(map, enemy, data);
-			map[enemy->y][enemy->x] = 'N';
-			map[enemy->y][enemy->x + 1] = '0';
+			update_map_for_E('-', map, enemy);
 			move_enemy_on_window(enemy, data);
 			return ;
 		}
@@ -93,8 +58,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 			move_ground_on_window_E(enemy, data);
 			enemy->x++;
 			loose_if_E_walk_on_P(map, enemy, data);
-			map[enemy->y][enemy->x] = 'N';
-			map[enemy->y][enemy->x - 1] = '0';
+			update_map_for_E('+', map, enemy);
 			move_enemy_on_window(enemy, data);
 			return ;
 		}

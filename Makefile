@@ -3,22 +3,27 @@ CFLAGS =	-fPIE -Wall -Wextra -Werror -g3 -I.
 LINUX =		-I /usr/include -L /usr/lib -L mlx_linux -I mlx_linux -lXext -l X11 -lm -lz
 NAME =		so_long
 
-SRCS =		srcs/trash.c					\
-			srcs/window.c					\
+SRCS =		srcs/window.c					\
 			srcs/so_long.c					\
 			srcs/hook_events.c				\
-			srcs/pat_patrouille.c			\
-			srcs/map/init_map.c				\
 			srcs/map/check_arg.c			\
-			srcs/map/check_map_elems.c		\
 			srcs/map/check_map_borders.c	\
-			srcs/moves/move_player.c		\
-			srcs/moves/check_if_loose.c		\
+			srcs/map/check_map_elems.c		\
+			srcs/map/init_map.c				\
+			srcs/moves/check_if_access_E.c	\
 			srcs/moves/check_if_access_P.c	\
-			srcs/textures/display_img.c		\
+			srcs/moves/check_if_loose.c		\
+			srcs/moves/get_coordinates.c	\
+			srcs/moves/move_img.c			\
+			srcs/moves/move_player.c		\
+			srcs/moves/pat_patrouille.c		\
+			srcs/moves/update_map.c			\
 			srcs/textures/destroy_img.c		\
-			srcs/gnl/get_next_line.c		\
+			srcs/textures/display_img.c		\
+			srcs/utils/array_utils.c		\
+			srcs/utils/print_utils.c		\
 			srcs/gnl/get_next_line_utils.c	\
+			srcs/gnl/get_next_line.c		\
 
 OBJS =		$(SRCS:.c=.o)
 
