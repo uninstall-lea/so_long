@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/20 17:40:51 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/21 14:18:47 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_data
 	t_player	player;	
 }				t_data;
 
-void	check_if_loose_P(char **map, t_player *player, t_data *data);
+void	loose_if_P_walk_on_E(char **map, t_player *player, t_data *data);
 
 /* STRINGS */
 char	*ft_strchr(const char *str, int c);
@@ -182,8 +182,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	get_coordinates_player(char to_find, char **map, t_player *to_init);
 void	error_exit(int error);
-void	check_if_loose_E(char **map, t_enemy *enemy, t_data *data);
-void	check_if_loose_P(char **map, t_player *player, t_data *data);
+void	loose_if_E_walk_on_P(char **map, t_enemy *enemy, t_data *data);
+void	loose_if_P_walk_on_E(char **map, t_player *player, t_data *data);
 
 /* THE BAD GUYS */
 int		pat_patrouille(t_data *data);
