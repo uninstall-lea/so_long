@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 19:33:09 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:54:59 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ static void	set_textures(char **map, t_window *win, t_textures *set)
 
 void	display_img(char **map, t_window *win, t_textures *set)
 {
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
-	y = 0;
+	y = -1;
 	set_textures(map, win, set);
-	while (y * IMG_SIZE < win->h)
+	while (++y * IMG_SIZE < win->h)
 	{
-		x = 0;
-		while (x * IMG_SIZE < win->w)
+		x = -1;
+		while (++x * IMG_SIZE < win->w)
 		{
 			if (map[y][x] == EXIT)
 				put_img_to_window(x, y, win, set->exit);
@@ -70,8 +70,6 @@ void	display_img(char **map, t_window *win, t_textures *set)
 				put_img_to_window(x, y, win, set->player);
 			else if (map[y][x] == ENEMY)
 				put_img_to_window(x, y, win, set->enemy);
-			x++;
 		}
-		y++;
 	}
 }

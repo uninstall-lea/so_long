@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 17:46:54 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:18:45 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@
 # define CAN_GO_TO_PONEY TRUE
 # define CANT_GO_TO_PONEY FALSE
 
-
 /* TYPEDEF */
 typedef void	(*t_fptr)();
-
 
 /* STRUCTS */
 typedef struct s_window
@@ -118,18 +116,17 @@ typedef struct s_player
 
 typedef struct s_enemy
 {
-	int	dir;
-	long int x;
-	long int y;
+	int			dir;
+	long int	x;
+	long int	y;
 }			t_enemy;
 
 typedef struct s_time
 {
-
-	clock_t begin;
-	clock_t end;
-	int	current;
-	int previous;
+	clock_t	begin;
+	clock_t	end;
+	int		current;
+	int		previous;
 }				t_time;
 
 typedef struct s_data
@@ -141,7 +138,6 @@ typedef struct s_data
 	t_enemy		*enemy;
 	t_player	player;	
 }				t_data;
-
 
 /* PROTOTYPES */
 /* MAP */
@@ -168,27 +164,31 @@ void	move_right(char **map, t_data *data);
 
 /* PLAYER */
 int		can_i_go_to_poney(char **map, t_player *player, t_data *data);
-int		increase_P(char where, char **map, t_player *player, t_data *data);
-int		decrease_P(char where, char **map, t_player *player, t_data *data);
-void	loose_if_P_walk_on_E(char **map, t_player *p, t_data *data);
-void	update_map_for_P(char where, char how, char **map, t_player *p);
+int		can_i_increase_p(char where, char **map,
+			t_player *player, t_data *data);
+int		can_i_decrease_p(char where, char **map,
+			t_player *player, t_data *data);
+void	loose_if_p_walk_on_e(char **map, t_player *p, t_data *data);
+void	update_map_for_player(char where, char how, char **map, t_player *p);
 void	get_coordinates_player(char to_find, char **map, t_player *to_init);
 
 /* THE BAD GUYS */
 int		pat_patrouille(t_data *data);
 int		has_enough_time_passed(t_time *time);
-int 	increase_E(char **map, t_enemy *enemy);
-int 	decrease_E(char **map, t_enemy *enemy);
-void 	if_obstacle_change_dir(t_enemy *enemy);
-void	update_map_for_E(char how, char **map, t_enemy *e);
-void	loose_if_E_walk_on_P(char **map, t_enemy *e, t_data *data);
+int		can_i_increase_e(char **map, t_enemy *enemy);
+int		can_i_decrease_e(char **map, t_enemy *enemy);
+void	set_up_time(t_time *time);
+void	set_up_enemies(t_data *data);
+void	if_obstacle_change_dir(t_enemy *enemy);
+void	update_map_for_enemy(char how, char **map, t_enemy *e);
+void	loose_if_e_walk_on_p(char **map, t_enemy *e, t_data *data);
 void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
 
 /* MOVE IMG */
 void	move_player_on_window(t_data *data);
 void	move_enemy_on_window(t_enemy *enemy, t_data *data);
-void	move_ground_on_window_P(t_data *data);
-void	move_ground_on_window_E(t_enemy *enemy, t_data *data);
+void	move_ground_on_window_p(t_data *data);
+void	move_ground_on_window_e(t_enemy *enemy, t_data *data);
 
 /* UTILS */
 	/* ARRAY */

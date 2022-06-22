@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 17:17:16 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:56:17 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_all_hook(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data		data;
-	
+
 	init_all_data(ac, av, &data);
 	init_all_hook(&data);
 	mlx_loop(data.win.mlx);

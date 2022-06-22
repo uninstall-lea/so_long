@@ -12,40 +12,31 @@
 
 #include "../../incs/so_long.h"
 
-static void set_up_time(t_time *time)
+static void	increase_enemy(char **map, t_enemy *enemy, t_data *data)
 {
-	time->begin = clock();
-	time->current = 0;
-	time->previous = 0;
+	move_ground_on_window_e(enemy, data);
+	enemy->x--;
+	loose_if_e_walk_on_p(map, enemy, data);
+	update_map_for_enemy('-', map, enemy);
+	move_enemy_on_window(enemy, data);
 }
 
-static void set_up_enemies(t_data *data)
+static void	decrease_enemy(char **map, t_enemy *enemy, t_data *data)
 {
-	int		i;
-
-	data->enemy = malloc(sizeof(t_enemy) * data->map.nb_enemy);
-	if (!data->enemy)
-		error_exit(1);
-	i = 0;
-	while (i < data->map.nb_enemy)
-	{
-		get_coordinates_enemy(ENEMY, data->map.str_map, &data->enemy[i]);
-		data->enemy[i].dir = LEFT;
-		i++;
-	}
+	move_ground_on_window_e(enemy, data);
+	enemy->x++;
+	loose_if_e_walk_on_p(map, enemy, data);
+	update_map_for_enemy('+', map, enemy);
+	move_enemy_on_window(enemy, data);
 }
 
 static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 {
 	if (enemy->dir == LEFT)
 	{
-		if (decrease_E(map, enemy) == CAN_MOVE)
+		if (can_i_decrease_e(map, enemy) == CAN_MOVE)
 		{	
-			move_ground_on_window_E(enemy, data);
-			enemy->x--;
-			loose_if_E_walk_on_P(map, enemy, data);
-			update_map_for_E('-', map, enemy);
-			move_enemy_on_window(enemy, data);
+			increase_enemy(map, enemy, data);
 			return ;
 		}
 		else
@@ -53,13 +44,9 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 	}
 	else if (enemy->dir == RIGHT)
 	{
-		if (increase_E(map, enemy) == CAN_MOVE)
+		if (can_i_increase_e(map, enemy) == CAN_MOVE)
 		{
-			move_ground_on_window_E(enemy, data);
-			enemy->x++;
-			loose_if_E_walk_on_P(map, enemy, data);
-			update_map_for_E('+', map, enemy);
-			move_enemy_on_window(enemy, data);
+			decrease_enemy(map, enemy, data);
 			return ;
 		}
 		else
@@ -67,22 +54,9 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 	}
 }
 
-static void	patrol(t_enemy *enemy, t_data *data)
-{
-	int	i;
-
-	i = 0;
-	if (has_enough_time_passed(&data->time) == YES)
-	{
-		while (i < data->map.nb_enemy)
-		{
-			move_enemy(data->map.str_map, &enemy[i], data);
-			i++;
-		}
-	}
-}
 int	pat_patrouille(t_data *data)
 {
+	int			i;
 	static int	init = YES;
 
 	if (init == YES)
@@ -91,6 +65,14 @@ int	pat_patrouille(t_data *data)
 		set_up_enemies(data);
 		init = NO;
 	}
-	patrol(data->enemy, data);
+	i = 0;
+	if (has_enough_time_passed(&data->time) == YES)
+	{
+		while (i < data->map.nb_enemy)
+		{
+			move_enemy(data->map.str_map, &data->enemy[i], data);
+			i++;
+		}
+	}
 	return (BANG_BANG_YOU_SHOT_ME_DOWN);
 }

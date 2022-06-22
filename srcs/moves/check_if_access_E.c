@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:36:09 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 15:37:45 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 16:02:16 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	has_enough_time_passed(t_time *time)
 	return (NO);
 }
 
-void if_obstacle_change_dir(t_enemy *enemy)
+void	if_obstacle_change_dir(t_enemy *enemy)
 {
 	if (enemy->dir == LEFT)
 		enemy->dir = RIGHT;
@@ -32,14 +32,14 @@ void if_obstacle_change_dir(t_enemy *enemy)
 		enemy->dir = LEFT;
 }
 
-int increase_E(char **map, t_enemy *enemy)
+int	can_i_increase_e(char **map, t_enemy *enemy)
 {
 	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x + 1]))
 		return (CANT_MOVE);
 	return (CAN_MOVE);
 }
 
-int decrease_E(char **map, t_enemy *enemy)
+int	can_i_decrease_e(char **map, t_enemy *enemy)
 {
 	if (ft_strchr(OBSTACLE, map[enemy->y][enemy->x - 1]))
 		return (CANT_MOVE);

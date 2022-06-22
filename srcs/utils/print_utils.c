@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:39:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 16:49:33 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:56:07 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	error_exit(int error)
 	else if (error == 3)
 		write(2, "ERROR[3] : Given arg is not a '.ber' \n", 38);
 	else if (error == 4)
-		write(2, "ERROR[4] : Wrong number of arg(s) given\n", 40);	
+		write(2, "ERROR[4] : Wrong number of arg(s) given\n", 40);
 	else if (error == 5)
 		write(2, "ERROR[5] : Map is not closed or rectangle\n", 42);
 	else if (error == 6)
@@ -52,6 +52,6 @@ void	error_exit(int error)
 	else if (error == 7)
 		write(2, "ERROR[7] : One elem (or more) has not the right value\n", 54);
 	else if (error == 8)
-		write(2, "ERROR[8] : One char on the map (or more) is not an elem\n", 56);
+		write(2, "ERROR[8] : One char on map (or more) is not an elem\n", 56);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:46:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 19:46:47 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:52:41 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	is_map_closed(int line, char c, char *map, t_map *check)
 {
 	if ((c != BORDER && (line == 0 || line == check->nb_lines - 1))
 		|| (map[0] != BORDER && (line > 0 && line < check->nb_lines))
-		|| (map[ft_strlen(map) - 2] != BORDER && (line > 0 && line < check->nb_lines)))
+		|| (map[ft_strlen(map) - 2] != BORDER
+			&& (line > 0 && line < check->nb_lines)))
 		return (FALSE);
 	return (TRUE);
 }

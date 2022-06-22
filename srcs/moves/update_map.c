@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/22 15:51:22 by lbisson           #+#    #+#             */
+/*   Updated: 2022/06/22 15:51:25 by lbisson          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-void	update_map_for_P(char where, char how, char **map, t_player *p)
+void	update_map_for_player(char where, char how, char **map, t_player *p)
 {
 	if (where == 'y' && how == '-')
 	{
@@ -25,7 +36,7 @@ void	update_map_for_P(char where, char how, char **map, t_player *p)
 	}
 }
 
-void	update_map_for_E(char how, char **map, t_enemy *e)
+void	update_map_for_enemy(char how, char **map, t_enemy *e)
 {
 	if (how == '-')
 	{
