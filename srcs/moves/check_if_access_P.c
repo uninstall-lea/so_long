@@ -6,7 +6,7 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:50:02 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 18:09:35 by lea              ###   ########.fr       */
+/*   Updated: 2022/06/29 18:44:39 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	can_i_go_to_poney(char **map, t_player *player, t_data *data)
 		&& data->map.nb_collec <= NO_MORE_COLLECTIBLE_LEFT)
 	{
 		put_img_to_window(player->x, player->y, &data->win, data->pack.player);
+		write(1, "CONGRATS !!!! YOU WON !!! MAZEL TOV MY BRUDDAH !!!!!!!\n", 56);
 		close_window(data);
 	}
 	return (NO);
