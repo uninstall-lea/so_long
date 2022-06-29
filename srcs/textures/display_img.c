@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 15:54:59 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 16:25:45 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
 			&set->collec.w, &set->collec.h);
 	set->player.img = mlx_xpm_file_to_image(win->mlx, set->player.path,
 			&set->player.w, &set->player.h);
-	set->enemy.img = mlx_xpm_file_to_image(win->mlx, set->enemy.path,
-			&set->enemy.w, &set->enemy.h);
-	if (!set->exit.img || !set->ground.img || !set->border.img
-		|| !set->collec.img || !set->player.img || !set->enemy.img)
+	set->red_enemy.img = mlx_xpm_file_to_image(win->mlx, set->red_enemy.path,
+			&set->red_enemy.w, &set->red_enemy.h);
+	set->blue_enemy.img = mlx_xpm_file_to_image(win->mlx, set->blue_enemy.path,
+			&set->blue_enemy.w, &set->blue_enemy.h);
+	set->green_enemy.img = mlx_xpm_file_to_image(win->mlx, set->green_enemy.path,
+			&set->green_enemy.w, &set->green_enemy.h);
+	if (!set->collec.img || !set->player.img ||!set->exit.img
+		|| !set->ground.img || !set->border.img || !set->red_enemy.img
+		|| !set->green_enemy.img || !set->blue_enemy.img)
 	{
 		ft_free(map);
 		destroy_img(win, set);
@@ -42,7 +47,9 @@ static void	set_textures(char **map, t_window *win, t_textures *set)
 	set->exit.path = "./srcs/textures/rainbow_dash.xpm";
 	set->border.path = "./srcs/textures/malicious_star.xpm";
 	set->player.path = "./srcs/textures/lbisson_de_noel.xpm";
-	set->enemy.path = "./srcs/textures/evil_fat_bisson.xpm";
+	set->red_enemy.path = "./srcs/textures/red_bisson.xpm";
+	set->green_enemy.path = "./srcs/textures/green_bisson.xpm";
+	set->blue_enemy.path = "./srcs/textures/blue_bisson.xpm";
 	convert_all_xpm(map, win, set);
 }
 
@@ -69,7 +76,7 @@ void	display_img(char **map, t_window *win, t_textures *set)
 			else if (map[y][x] == PLAYER)
 				put_img_to_window(x, y, win, set->player);
 			else if (map[y][x] == ENEMY)
-				put_img_to_window(x, y, win, set->enemy);
+				put_img_to_window(x, y, win, set->red_enemy);
 		}
 	}
 }

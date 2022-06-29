@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_img.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:48:59 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/07 17:26:18 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:01:03 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	destroy_img(t_window *win, t_textures *pack)
 		mlx_destroy_image(win->mlx, pack->collec.img);
 	if (pack->player.img)
 		mlx_destroy_image(win->mlx, pack->player.img);
-	if (pack->enemy.img)
-		mlx_destroy_image(win->mlx, pack->enemy.img);
+	if (pack->red_enemy.img)
+		mlx_destroy_image(win->mlx, pack->red_enemy.img);
+	if (pack->green_enemy.img)
+		mlx_destroy_image(win->mlx, pack->green_enemy.img);
+	if (pack->blue_enemy.img)
+		mlx_destroy_image(win->mlx, pack->blue_enemy.img);
 }	

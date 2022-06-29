@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_access_P.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 15:50:02 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 16:03:31 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:17:38 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	can_i_go_to_poney(char **map, t_player *player, t_data *data)
 	if (map[player->y][player->x] == EXIT
 		&& data->map.nb_collec <= NO_MORE_COLLECTIBLE_LEFT)
 	{
-		move_player_on_window(data);
+		put_img_to_window(player->x, player->y, &data->win, data->pack.player);
 		close_window(data);
 	}
 	return (NO);

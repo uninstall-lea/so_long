@@ -14,20 +14,20 @@
 
 static void	increase_enemy(char **map, t_enemy *enemy, t_data *data)
 {
-	move_ground_on_window_e(enemy, data);
+	put_img_to_window(enemy->x, enemy->y, &data->win, data->pack.ground);
 	enemy->x--;
 	loose_if_e_walk_on_p(map, enemy, data);
 	update_map_for_enemy('-', map, enemy);
-	move_enemy_on_window(enemy, data);
+	bisson_rgb(enemy, data);
 }
 
 static void	decrease_enemy(char **map, t_enemy *enemy, t_data *data)
 {
-	move_ground_on_window_e(enemy, data);
+	put_img_to_window(enemy->x, enemy->y, &data->win, data->pack.ground);
 	enemy->x++;
 	loose_if_e_walk_on_p(map, enemy, data);
 	update_map_for_enemy('+', map, enemy);
-	move_enemy_on_window(enemy, data);
+	bisson_rgb(enemy, data);
 }
 
 static void	move_enemy(char **map, t_enemy *enemy, t_data *data)

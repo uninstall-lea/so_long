@@ -31,7 +31,7 @@ int	hook_events(int keycode, t_data *data)
 
 	event = (*dispatch)(keycode);
 	if (event)
-		(*event)(data->map.str_map, data);
+		(*event)(data->map.str_map, data->player, data);
 	else if (keycode == ESC)
 		close_window(data);
 	return (0);

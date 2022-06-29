@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_loose.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:39:37 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 15:49:08 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 17:00:10 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	loose_if_e_walk_on_p(char **map, t_enemy *e, t_data *data)
 {
 	if (map[e->y][e->x] == PLAYER)
 	{
-		move_enemy_on_window(e, data);
+		bisson_rgb(e, data);
 		write(2, "HAHA ! YOU LOST ! MECREANT !\n", 30);
 		close_window(data);
 	}

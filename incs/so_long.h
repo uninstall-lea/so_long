@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 16:18:45 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 16:58:00 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # define NOT_FOUND 404
 # define NO_MORE_COLLECTIBLE_LEFT 0
 # define BANG_BANG_YOU_SHOT_ME_DOWN 666
+
+/* DEFINE RGB */
+# define RED 0
+# define GREEN 1
+# define BLUE 2
 
 /* MAP ELEMS */
 # define EXIT 'E'
@@ -101,10 +106,12 @@ typedef struct s_textures
 {
 	t_image	border;
 	t_image	collec;
-	t_image	enemy;	
 	t_image	player;
 	t_image	exit;
 	t_image	ground;
+	t_image	red_enemy;
+	t_image blue_enemy;
+	t_image green_enemy;
 }			t_textures;
 
 typedef struct s_player
@@ -117,6 +124,7 @@ typedef struct s_player
 typedef struct s_enemy
 {
 	int			dir;
+	int			rgb;
 	long int	x;
 	long int	y;
 }			t_enemy;
@@ -145,8 +153,11 @@ void	init_map(int ac, char **av, t_map *map);
 void	check_arg(int ac, char **av, t_map *check);
 void	check_map_elems(int line, char *map, t_map *check);
 void	check_map_borders(int line, char *map, t_map *check);
+void	update_map_for_enemy(char how, char **map, t_enemy *e);
+void	update_map_for_player(char where, char how, char **map, t_player *p);
 
 /* TEXTURES */
+void    bisson_rgb(t_enemy *enemy, t_data *data);
 void	display_img(char **map, t_window *win, t_textures *set);
 void	destroy_img(t_window *win, t_textures *pack);
 
@@ -157,22 +168,21 @@ void	put_img_to_window(int x, int y, t_window *win, t_image to_put);
 
 /* EVENTS */
 int		hook_events(int keycode, t_data *data);
-void	move_up(char **map, t_data *data);
-void	move_left(char **map, t_data *data);
-void	move_down(char **map, t_data *data);
-void	move_right(char **map, t_data *data);
+void	move_up(char **map, t_player *player, t_data *data);
+void	move_left(char **map, t_player *player, t_data *data);
+void	move_down(char **map, t_player *player, t_data *data);
+void	move_right(char **map, t_player *player, t_data *data);
 
-/* PLAYER */
+/* MOVES */
+	/* PLAYER */
 int		can_i_go_to_poney(char **map, t_player *player, t_data *data);
 int		can_i_increase_p(char where, char **map,
 			t_player *player, t_data *data);
 int		can_i_decrease_p(char where, char **map,
 			t_player *player, t_data *data);
 void	loose_if_p_walk_on_e(char **map, t_player *p, t_data *data);
-void	update_map_for_player(char where, char how, char **map, t_player *p);
 void	get_coordinates_player(char to_find, char **map, t_player *to_init);
-
-/* THE BAD GUYS */
+	/* THE BAD GUYS */
 int		pat_patrouille(t_data *data);
 int		has_enough_time_passed(t_time *time);
 int		can_i_increase_e(char **map, t_enemy *enemy);
@@ -180,15 +190,8 @@ int		can_i_decrease_e(char **map, t_enemy *enemy);
 void	set_up_time(t_time *time);
 void	set_up_enemies(t_data *data);
 void	if_obstacle_change_dir(t_enemy *enemy);
-void	update_map_for_enemy(char how, char **map, t_enemy *e);
 void	loose_if_e_walk_on_p(char **map, t_enemy *e, t_data *data);
 void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
-
-/* MOVE IMG */
-void	move_player_on_window(t_data *data);
-void	move_enemy_on_window(t_enemy *enemy, t_data *data);
-void	move_ground_on_window_p(t_data *data);
-void	move_ground_on_window_e(t_enemy *enemy, t_data *data);
 
 /* UTILS */
 	/* ARRAY */
