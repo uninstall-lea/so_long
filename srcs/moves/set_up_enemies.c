@@ -6,7 +6,7 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:09:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 16:34:09 by lea              ###   ########.fr       */
+/*   Updated: 2022/06/29 17:44:59 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_up_enemies(t_data *data)
 	i = 0;
 	while (i < data->map.nb_enemy)
 	{
-		get_coordinates_enemy(ENEMY, data->map.str_map, &data->enemy[i]);
+		get_coordinates_enemy(data->map.str_map, &data->enemy[i]);
 		data->enemy[i].dir = LEFT;
 		data->enemy[i].rgb = RED;
 		i++;

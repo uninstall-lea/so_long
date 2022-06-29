@@ -6,7 +6,7 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 16:25:45 by lea              ###   ########.fr       */
+/*   Updated: 2022/06/29 18:28:46 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
 			&set->red_enemy.w, &set->red_enemy.h);
 	set->blue_enemy.img = mlx_xpm_file_to_image(win->mlx, set->blue_enemy.path,
 			&set->blue_enemy.w, &set->blue_enemy.h);
-	set->green_enemy.img = mlx_xpm_file_to_image(win->mlx, set->green_enemy.path,
-			&set->green_enemy.w, &set->green_enemy.h);
+	set->green_enemy.img = mlx_xpm_file_to_image(win->mlx,
+			set->green_enemy.path, &set->green_enemy.w, &set->green_enemy.h);
 	if (!set->collec.img || !set->player.img ||!set->exit.img
 		|| !set->ground.img || !set->border.img || !set->red_enemy.img
 		|| !set->green_enemy.img || !set->blue_enemy.img)

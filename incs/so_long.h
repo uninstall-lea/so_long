@@ -6,7 +6,7 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 16:58:00 by lea              ###   ########.fr       */
+/*   Updated: 2022/06/29 18:18:03 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ typedef struct s_textures
 	t_image	exit;
 	t_image	ground;
 	t_image	red_enemy;
-	t_image blue_enemy;
-	t_image green_enemy;
+	t_image	blue_enemy;
+	t_image	green_enemy;
 }			t_textures;
 
 typedef struct s_player
@@ -157,7 +157,7 @@ void	update_map_for_enemy(char how, char **map, t_enemy *e);
 void	update_map_for_player(char where, char how, char **map, t_player *p);
 
 /* TEXTURES */
-void    bisson_rgb(t_enemy *enemy, t_data *data);
+void	bisson_rgb(t_enemy *enemy, t_data *data);
 void	display_img(char **map, t_window *win, t_textures *set);
 void	destroy_img(t_window *win, t_textures *pack);
 
@@ -181,17 +181,17 @@ int		can_i_increase_p(char where, char **map,
 int		can_i_decrease_p(char where, char **map,
 			t_player *player, t_data *data);
 void	loose_if_p_walk_on_e(char **map, t_player *p, t_data *data);
-void	get_coordinates_player(char to_find, char **map, t_player *to_init);
+void	get_coordinates_player(char **map, t_player *to_init);
 	/* THE BAD GUYS */
-int		pat_patrouille(t_data *data);
-int		has_enough_time_passed(t_time *time);
-int		can_i_increase_e(char **map, t_enemy *enemy);
 int		can_i_decrease_e(char **map, t_enemy *enemy);
+int		can_i_increase_e(char **map, t_enemy *enemy);
+int		has_enough_time_passed(t_time *time);
+int		pat_patrouille(t_data *data);
 void	set_up_time(t_time *time);
 void	set_up_enemies(t_data *data);
-void	if_obstacle_change_dir(t_enemy *enemy);
+void	get_coordinates_enemy(char **map, t_enemy *to_init);
+void	if_obstacle_change_dir(t_enemy *enemy, t_data *data);
 void	loose_if_e_walk_on_p(char **map, t_enemy *e, t_data *data);
-void	get_coordinates_enemy(char to_find, char **map, t_enemy *to_init);
 
 /* UTILS */
 	/* ARRAY */

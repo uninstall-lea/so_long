@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_access_E.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:36:09 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 16:02:16 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 18:35:09 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	has_enough_time_passed(t_time *time)
 {
 	time->end = clock();
-	time->current = (time->end - time->begin) / (CLOCKS_PER_SEC / 2);
+	time->current = (time->end - time->begin) / (CLOCKS_PER_SEC / 21);
 	if (time->previous != time->current)
 	{
 		time->previous = time->current;
@@ -24,12 +24,18 @@ int	has_enough_time_passed(t_time *time)
 	return (NO);
 }
 
-void	if_obstacle_change_dir(t_enemy *enemy)
+void	if_obstacle_change_dir(t_enemy *enemy, t_data *data)
 {
 	if (enemy->dir == LEFT)
+	{	
 		enemy->dir = RIGHT;
+		bisson_rgb(enemy, data);
+	}
 	else if (enemy->dir == RIGHT)
+	{
 		enemy->dir = LEFT;
+		bisson_rgb(enemy, data);
+	}
 }
 
 int	can_i_increase_e(char **map, t_enemy *enemy)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:39:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 15:56:07 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/06/29 18:25:43 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	error_exit(int error)
 	else if (error == 7)
 		write(2, "ERROR[7] : One elem (or more) has not the right value\n", 54);
 	else if (error == 8)
-		write(2, "ERROR[8] : One char on map (or more) is not an elem\n", 56);
+		write(2, "ERROR[8] : One char on map (or more) is not an elem\n", 53);
 	exit(EXIT_FAILURE);
 }

@@ -40,7 +40,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 			return ;
 		}
 		else
-			if_obstacle_change_dir(enemy);
+			if_obstacle_change_dir(enemy, data);
 	}
 	else if (enemy->dir == RIGHT)
 	{
@@ -50,7 +50,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 			return ;
 		}
 		else
-			if_obstacle_change_dir(enemy);
+			if_obstacle_change_dir(enemy, data);
 	}
 }
 
