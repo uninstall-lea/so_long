@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 15:39:26 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 18:25:43 by lea              ###   ########.fr       */
+/*   Updated: 2022/07/13 01:51:38 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	error_exit(int error)
 	if (error == 1)
 		write(2, "ERROR[1] : Wrong malloc\n", 24);
 	else if (error == 2)
-		write(2, "ERROR[2] : Wrong map size\n", 26);
+		write(2, "ERROR[2] : Wrong line size\n", 28);
 	else if (error == 3)
 		write(2, "ERROR[3] : Given arg is not a '.ber' \n", 38);
 	else if (error == 4)
@@ -50,8 +50,8 @@ void	error_exit(int error)
 	else if (error == 6)
 		write(2, "ERROR[6] : One image (or more) couldn't be found\n", 49);
 	else if (error == 7)
-		write(2, "ERROR[7] : One elem (or more) has not the right value\n", 54);
+		write(2, "ERROR[7] : Error on a map elem (or more)\n", 42);
 	else if (error == 8)
-		write(2, "ERROR[8] : One char on map (or more) is not an elem\n", 53);
+		write(2, "ERROR[8] : Could not open given file\n", 38);
 	exit(EXIT_FAILURE);
 }

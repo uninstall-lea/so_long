@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 21:20:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/21 16:50:27 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/13 01:01:42 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	ft_free(char **str)
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		free(str[i]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 18:18:03 by lea              ###   ########.fr       */
+/*   Updated: 2022/07/13 01:43:15 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 /* DEFINE VALUES */
 # define TRUE 1
 # define FALSE 0
+# define ERROR 0
 # define IMG_SIZE 64
 # define ON_DESTROY 17
 # define NOT_FOUND 404
@@ -149,10 +150,10 @@ typedef struct s_data
 
 /* PROTOTYPES */
 /* MAP */
-void	init_map(int ac, char **av, t_map *map);
+int		check_map_elems(int line, char *map, t_map *check);
+int		check_map_borders(int line, char *map, t_map *check);
 void	check_arg(int ac, char **av, t_map *check);
-void	check_map_elems(int line, char *map, t_map *check);
-void	check_map_borders(int line, char *map, t_map *check);
+void	init_map(int ac, char **av, t_data *data);
 void	update_map_for_enemy(char how, char **map, t_enemy *e);
 void	update_map_for_player(char where, char how, char **map, t_player *p);
 

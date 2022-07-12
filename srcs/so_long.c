@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 16:50:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 17:30:10 by lea              ###   ########.fr       */
+/*   Updated: 2022/07/12 23:44:35 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_all_data(int ac, char **av, t_data *data)
 {
-	init_map(ac, av, &data->map);
+	init_map(ac, av, data);
 	open_window(&data->win, &data->map);
 	display_img(data->map.str_map, &data->win, &data->pack);
 	get_coordinates_player(data->map.str_map, &data->player);

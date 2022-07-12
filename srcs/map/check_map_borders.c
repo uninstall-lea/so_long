@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:46:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 15:52:41 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/12 23:25:26 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_map_closed(int line, char c, char *map, t_map *check)
 	return (TRUE);
 }
 
-void	check_map_borders(int line, char *map, t_map *check)
+int	check_map_borders(int line, char *map, t_map *check)
 {
 	int	i;
 
@@ -38,7 +38,8 @@ void	check_map_borders(int line, char *map, t_map *check)
 	{
 		if (is_len_const(map, check) == NOT_RECTANGLE
 			|| is_map_closed(line, map[i], map, check) == NOT_CLOSED)
-			error_exit(5);
+			return (ERROR);
 		i++;
 	}
+	return (1);
 }

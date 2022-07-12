@@ -6,7 +6,7 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:44:49 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/22 15:52:46 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/13 01:57:14 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	count_each_elems(int line, char elem, t_map *check)
 	return (TRUE);
 }
 
-void	check_map_elems(int line, char *map, t_map *check)
+int	check_map_elems(int line, char *map, t_map *check)
 {
 	int	i;
 
@@ -43,10 +43,11 @@ void	check_map_elems(int line, char *map, t_map *check)
 	while (map[i] && map[i] != '\n')
 	{
 		if (is_elem(map[i]) == NOT_ELEM)
-			error_exit(8);
+			return (ERROR);
 		count_each_elems(line, map[i], check);
 		i++;
 	}
 	if (count_each_elems(line, map[i], check) == FALSE)
-		error_exit(7);
+		return (ERROR);
+	return (1);
 }
