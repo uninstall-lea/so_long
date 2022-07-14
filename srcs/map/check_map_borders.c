@@ -6,15 +6,24 @@
 /*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:46:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/07/12 23:25:26 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/14 19:52:41 by lbisson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
+static int	if_no_nl_at_eof(char *map)
+{
+	if (map[ft_strlen(map) - 1] != '\n' && ft_strlen(map) == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 static int	is_len_const(char *map, t_map *check)
 {
-	if ((int)ft_strlen(map) - 1 != check->nb_columns)
+	if (if_no_nl_at_eof(map) == FALSE)
+		return (FALSE);
+	else if ((int)ft_strlen(map) - 1 != check->nb_columns)
 		return (FALSE);
 	return (TRUE);
 }
