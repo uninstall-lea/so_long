@@ -3,26 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_borders.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:46:33 by lbisson           #+#    #+#             */
-/*   Updated: 2022/07/14 19:52:41 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/14 20:35:16 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-static int	if_no_nl_at_eof(char *map)
+static int	if_no_nl_at_eof(int line, char *map, t_map *check)
 {
-	if (map[ft_strlen(map) - 1] != '\n' && ft_strlen(map) == 0)
+	if ((int)ft_strlen(map) == check->nb_columns && line == check->nb_lines -1
+		&& map[ft_strlen(map) - 1] != '\n')
 		return (TRUE);
 	return (FALSE);
 }
 
-static int	is_len_const(char *map, t_map *check)
+static int	is_len_const(int line, char *map, t_map *check)
 {
-	if (if_no_nl_at_eof(map) == FALSE)
-		return (FALSE);
+	if (if_no_nl_at_eof(line, map, check) == TRUE)
+		return (TRUE);
 	else if ((int)ft_strlen(map) - 1 != check->nb_columns)
 		return (FALSE);
 	return (TRUE);
@@ -45,7 +46,7 @@ int	check_map_borders(int line, char *map, t_map *check)
 	i = 0;
 	while (map[i] && map[i] != '\n')
 	{
-		if (is_len_const(map, check) == NOT_RECTANGLE
+		if (is_len_const(line, map, check) == NOT_RECTANGLE
 			|| is_map_closed(line, map[i], map, check) == NOT_CLOSED)
 			return (ERROR);
 		i++;

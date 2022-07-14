@@ -6,13 +6,13 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:50:53 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/29 18:28:46 by lea              ###   ########.fr       */
+/*   Updated: 2022/07/14 21:22:20 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/so_long.h"
 
-static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
+static void	convert_all_xpm(t_window *win, t_textures *set, t_data *data)
 {
 	set->exit.img = mlx_xpm_file_to_image(win->mlx, set->exit.path,
 			&set->exit.w, &set->exit.h);
@@ -34,13 +34,12 @@ static void	convert_all_xpm(char **map, t_window *win, t_textures *set)
 		|| !set->ground.img || !set->border.img || !set->red_enemy.img
 		|| !set->green_enemy.img || !set->blue_enemy.img)
 	{
-		ft_free(map);
-		destroy_img(win, set);
-		error_exit(6);
+		write(2, "ERROR[6] : One image (or more) couldn't be found\n", 49);
+		close_window(data);
 	}
 }
 
-static void	set_textures(char **map, t_window *win, t_textures *set)
+static void	set_textures(t_window *win, t_textures *set, t_data *data)
 {	
 	set->collec.path = "./srcs/textures/doll.xpm";
 	set->ground.path = "./srcs/textures/rainbow.xpm";
@@ -50,16 +49,16 @@ static void	set_textures(char **map, t_window *win, t_textures *set)
 	set->red_enemy.path = "./srcs/textures/red_bisson.xpm";
 	set->green_enemy.path = "./srcs/textures/green_bisson.xpm";
 	set->blue_enemy.path = "./srcs/textures/blue_bisson.xpm";
-	convert_all_xpm(map, win, set);
+	convert_all_xpm(win, set, data);
 }
 
-void	display_img(char **map, t_window *win, t_textures *set)
+void	display_img(char **map, t_window *win, t_textures *set, t_data *data)
 {
 	int	x;
 	int	y;
 
 	y = -1;
-	set_textures(map, win, set);
+	set_textures(win, set, data);
 	while (++y * IMG_SIZE < win->h)
 	{
 		x = -1;

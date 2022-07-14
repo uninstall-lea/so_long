@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy_patrol.c                                   :+:      :+:    :+:   */
+/*   pat_patrol.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 18:47:24 by lbisson           #+#    #+#             */
-/*   Updated: 2022/06/06 18:55:06 by lbisson          ###   ########.fr       */
+/*   Created: 2022/07/14 20:15:59 by lea               #+#    #+#             */
+/*   Updated: 2022/07/14 21:31:33 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	move_enemy(char **map, t_enemy *enemy, t_data *data)
 	}
 }
 
-int	pat_patrouille(t_data *data)
+int	pat_patrol(t_data *data)
 {
 	int			i;
 	static int	init = YES;

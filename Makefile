@@ -17,7 +17,7 @@ SRCS =		srcs/window.c					\
 			srcs/moves/check_if_loose.c		\
 			srcs/moves/get_coordinates.c	\
 			srcs/moves/move_player.c		\
-			srcs/moves/pat_patrouille.c		\
+			srcs/moves/pat_patrol.c		\
 			srcs/moves/set_up_enemies.c		\
 			srcs/textures/bisson_rgb.c		\
 			srcs/textures/destroy_img.c		\

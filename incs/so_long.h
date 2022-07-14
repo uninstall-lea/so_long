@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbisson <lbisson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 17:58:48 by lbisson           #+#    #+#             */
-/*   Updated: 2022/07/13 01:43:15 by lbisson          ###   ########.fr       */
+/*   Updated: 2022/07/14 21:25:03 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include <time.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
@@ -159,7 +158,7 @@ void	update_map_for_player(char where, char how, char **map, t_player *p);
 
 /* TEXTURES */
 void	bisson_rgb(t_enemy *enemy, t_data *data);
-void	display_img(char **map, t_window *win, t_textures *set);
+void	display_img(char **map, t_window *win, t_textures *set, t_data *data);
 void	destroy_img(t_window *win, t_textures *pack);
 
 /* WINDOW */
@@ -187,7 +186,7 @@ void	get_coordinates_player(char **map, t_player *to_init);
 int		can_i_decrease_e(char **map, t_enemy *enemy);
 int		can_i_increase_e(char **map, t_enemy *enemy);
 int		has_enough_time_passed(t_time *time);
-int		pat_patrouille(t_data *data);
+int		pat_patrol(t_data *data);
 void	set_up_time(t_time *time);
 void	set_up_enemies(t_data *data);
 void	get_coordinates_enemy(char **map, t_enemy *to_init);
