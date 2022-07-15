@@ -6,7 +6,7 @@
 /*   By: lea <lea@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:39:37 by lbisson           #+#    #+#             */
-/*   Updated: 2022/07/14 21:21:44 by lea              ###   ########.fr       */
+/*   Updated: 2022/07/15 14:30:57 by lea              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	loose_if_p_walk_on_e(char **map, t_player *p, t_data *data)
 {
 	if (map[p->y][p->x] == ENEMY)
 	{
+		count_and_print_my_moves(data);
 		write(2, "HAHA ! YOU LOST ! MECREANT !\n", 30);
 		close_window(data);
 	}
